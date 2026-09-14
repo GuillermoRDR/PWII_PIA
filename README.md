@@ -4,7 +4,9 @@ Producto integrador de aprendizaje de la materia Programación web II
 Desarrollado por:
 
 Juan Enrique Leal Gutiérrez 1957848
+
 Guillermo René Dávila Roque 2003063
+
 Fernando Guzmán Díaz 1948627
 
 # Descripción 
