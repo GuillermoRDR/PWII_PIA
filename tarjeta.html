@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago con Tarjeta</title>
+
+    <link href="css/tarjeta.css" rel="stylesheet">
+
+
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/cb69cc3bd3.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+     <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
+
+    <div class="registro">
+        <p class="titulo">Pago con Tarjeta</p>
+
+        <div class="campo">
+            <label for="nombre-tarjeta">Nombre en la tarjeta</label>
+            <input type="text" id="nombre-tarjeta" placeholder="">
+        </div>
+
+        <div class="campo">
+            <label for="numero-tarjeta">Número de tarjeta</label>
+            <input type="text" id="numero-tarjeta" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000">
+        </div>
+
+        <div class="fila-doble">
+            <div class="campo">
+                <label for="vencimiento">Vencimiento</label>
+                <input type="text" id="vencimiento" inputmode="numeric" maxlength="5" placeholder="MM/AA">
+            </div>
+
+            <div class="campo">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" inputmode="numeric" maxlength="3" placeholder="000">
+            </div>
+        </div>
+    </div>
+
+     <button id="ragbot" onclick="window.location.href='principal.html'">Comprar</button>
+
+</body>
+</html>

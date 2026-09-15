@@ -1,0 +1,253 @@
+html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #EDBF9B;
+            min-height: 100vh;
+        }
+
+        div#header {
+            position: absolute;
+            width: 100%;
+            background-color: #FD7B41;
+            top: 0%;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            font-size: clamp(12px, 2.5vw, 20px);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            font-family: 'Archivo Black';
+        }
+
+        button {
+            color: white;
+            font-size: larger;
+        }
+
+        button#back {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            position: absolute;
+            width: 7%;
+            height: 105px;
+            background-color: red;
+            top: 0%;
+            left: 0%;
+            color: white;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            font-family: 'Archivo Black';
+            font-size: clamp(12px, 2.5vw, 67px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        button#back:hover {
+            background-color: rgb(255, 110, 110);
+        }
+
+        button#back:active {
+            background-color: rgb(99, 9, 9);
+            color: rgb(255, 110, 110);
+        }
+
+        .registro {
+            background-color: #DDDCDB;
+            max-width: 600px;
+            margin: 130px auto 30px;
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Dos columnas de igual altura: la columna derecha usa flexbox
+           para repartir esa misma altura entre Descripción e Imagen.
+           Si la columna izquierda es corta (pocos campos), la derecha
+           también lo es, y el textarea de Descripción se encoge solo
+           para dejarle espacio fijo a la imagen — sin que se traslapen. */
+        .registro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 30px;
+            align-items: stretch;
+        }
+
+        .columna {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .campo label {
+            font-family: 'Archivo Black';
+            color: #4b2c04;
+            font-size: clamp(13px, 2.5vw, 16px);
+        }
+
+        .campo input[type="text"],
+        .campo select {
+            border: 2px solid #4b2c04;
+            border-radius: 10px;
+            background-color: white;
+            font-family: 'Archivo Black';
+            font-size: clamp(12px, 2vw, 14px);
+            color: #4b2c04;
+            padding: 8px 10px;
+            outline: none;
+        }
+
+        .campo select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='%234b2c04' d='M5 7l5 6 5-6z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+
+        .campo textarea {
+            border: 2px solid #4b2c04;
+            border-radius: 10px;
+            background-color: white;
+            font-family: 'Archivo Black';
+            font-size: clamp(12px, 2vw, 14px);
+            color: #4b2c04;
+            padding: 8px 10px;
+            outline: none;
+            resize: none;
+        }
+
+        /* La descripción crece o se encoge según lo que sobre en la
+           columna derecha; min-height:0 es necesario para que un hijo
+           flex pueda encogerse por debajo de su alto de contenido. */
+        .campo-desc {
+            flex: 1;
+            min-height: 0;
+        }
+
+        .campo-desc textarea {
+            flex: 1;
+            min-height: 40px;
+        }
+
+        .dias {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .dia {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dia label {
+            font-size: clamp(10px, 1.8vw, 12px);
+        }
+
+        .dia input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 3px solid #4b2c04;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .dia input[type="checkbox"]:checked {
+            background-color: #FD7B41;
+        }
+
+        .campo-imagen {
+            flex: none;
+            align-items: flex-start;
+        }
+
+        .imagen-upload {
+            width: 100px;
+            height: 100px;
+            border: 3px dashed #4b2c04;
+            border-radius: 15px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .imagen-upload:hover {
+            background-color: #DDDCDB;
+        }
+
+        #preview-imagen {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #placeholder-imagen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: #a08765;
+            font-family: 'Archivo Black';
+            font-size: clamp(10px, 1.8vw, 12px);
+        }
+
+        #placeholder-imagen i {
+            font-size: 24px;
+        }
+
+        .acciones {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #registrar-puesto {
+            background-color: #FD7B41;
+            color: white;
+            font-family: 'Archivo Black';
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            border: none;
+            border-radius: 16px;
+            padding: 14px 50px;
+            font-size: clamp(14px, 2.5vw, 20px);
+            cursor: pointer;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            width: 100%;
+        }
+
+        #registrar-puesto:hover {
+            background-color: #EDBF9B;
+            color: #4b2c04;
+        }
+
+        #registrar-puesto:active {
+            background-color: #3C4044;
+            color: #EDBF9B;
+        }
