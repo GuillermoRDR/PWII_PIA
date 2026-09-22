@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Puesto</title>
+  <link href="css/regcom.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://kit.fontawesome.com/cb69cc3bd3.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="header">
+    <h1>Registro de Puesto</h1>
+  </div>
+
+  <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
+
+  <div class="registro">
+    <div class="registro-grid">
+
+      <div class="columna">
+        <div class="campo">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" placeholder="">
+        </div>
+
+        <div class="campo">
+          <label for="categorias">Categorías:</label>
+          <select id="categorias">
+            <option value="" selected>Categoría</option>
+            <option value="comida">Comida</option>
+            <option value="ropa">Ropa</option>
+            <option value="artesanias">Artesanías</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+
+        <div class="campo campo-dias">
+          <label>Días que se pone:</label>
+          <div class="dias">
+            <div class="dia">
+              <input type="checkbox" id="lu">
+              <label for="lu">Lu</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="ma">
+              <label for="ma">Ma</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="mi">
+              <label for="mi">Mi</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="ju">
+              <label for="ju">Ju</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="vi">
+              <label for="vi">Vi</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="sa">
+              <label for="sa">Sa</label>
+            </div>
+            <div class="dia">
+              <input type="checkbox" id="do">
+              <label for="do">Do</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columna">
+        <div class="campo campo-desc">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion"></textarea>
+        </div>
+
+        <div class="campo campo-imagen">
+          <label for="imagen">Imagen del puesto:</label>
+          <div class="imagen-upload" onclick="document.getElementById('imagen').click()">
+            <img id="preview-imagen" src="" alt="" style="display: none;">
+            <div id="placeholder-imagen">
+              <i class="fa-solid fa-camera"></i>
+              <span>Subir imagen</span>
+            </div>
+          </div>
+          <input type="file" id="imagen" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="ragbot" onclick="window.location.href='principal.html'">Registrar puesto</button>
+
+  <script>
+    function previsualizarImagen(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.getElementById('preview-imagen');
+        const placeholder = document.getElementById('placeholder-imagen');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+</body>
+
+</html>
