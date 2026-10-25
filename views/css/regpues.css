@@ -69,11 +69,7 @@ html, body {
             gap: 20px;
         }
 
-        /* Dos columnas de igual altura: la columna derecha usa flexbox
-           para repartir esa misma altura entre Descripción e Imagen.
-           Si la columna izquierda es corta (pocos campos), la derecha
-           también lo es, y el textarea de Descripción se encoge solo
-           para dejarle espacio fijo a la imagen — sin que se traslapen. */
+       
         .registro-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -133,9 +129,7 @@ html, body {
             resize: none;
         }
 
-        /* La descripción crece o se encoge según lo que sobre en la
-           columna derecha; min-height:0 es necesario para que un hijo
-           flex pueda encogerse por debajo de su alto de contenido. */
+        
         .campo-desc {
             flex: 1;
             min-height: 0;

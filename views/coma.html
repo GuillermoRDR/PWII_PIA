@@ -18,8 +18,14 @@
   <button id="back" onclick="window.location.href='principal.html'"><i class="fa-solid fa-reply"></i></button>
   <!--<audio autoplay src="media/music/september2015.mp3" type="audio/mpeg" loop></audio>-->
   <div id="header" style="background-image: url(media/images/mercadito4k.jpg);">
-    <h1>Mercadito Av Revolución</h1>
-    <label> Martes y Sábados</label>
+    <h1 id="nombre-comercio">Mercadito Av Revolución</h1>
+    <p id="descripcion-comercio">Tianguis tradicional con comida, ropa y mucho más.</p>
+    <label id="dias-comercio"> Martes y Sábados</label>
+
+    <div class="acciones-comercio">
+      <button id="editar-comercio" onclick="abrirEditar()"><i class="fa-solid fa-pen"></i><span class="txt">Editar comercio</span></button>
+      <button id="eliminar-comercio" onclick="abrirEliminar()"><i class="fa-solid fa-trash"></i><span class="txt">Eliminar comercio</span></button>
+    </div>
   </div>
 
   <br>
@@ -98,6 +104,152 @@
       style="font-size: 40px"></i>Configuración</button>
   <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'"><i class="fa-solid fa-credit-card"
       style="font-size: 40px"></i>Suscripción</button>
+
+  <div class="blur" id="blur-editar" onclick="cerrar(event)">
+    <div class="modal modal-editar">
+      <button class="cerrar-modal" onclick="cerrar(event)"><i class="fa-solid fa-xmark"></i></button>
+      <p class="modal-titulo">Editar comercio</p>
+
+      <label class="etiqueta" for="input-nombre">Nombre:</label>
+      <input type="text" id="input-nombre">
+
+      <label class="etiqueta" for="input-descripcion">Descripción:</label>
+      <textarea id="input-descripcion" rows="3"></textarea>
+
+      <label class="etiqueta" for="input-ubicacion">Ubicación:</label>
+      <input type="text" id="input-ubicacion">
+
+      <label class="etiqueta" for="input-categorias">Categorías:</label>
+      <textarea id="input-categorias" rows="2"></textarea>
+
+      <span class="etiqueta">Imagen del comercio:</span>
+      <label class="subir-imagen" id="vista-imagen" for="input-imagen">
+        <i class="fa-solid fa-camera"></i>
+        <span id="texto-imagen">Subir imagen</span>
+      </label>
+      <input type="file" id="input-imagen" accept="image/*" onchange="vistaPrevia(event)">
+
+      <span class="etiqueta">Días que se pone:</span>
+      <div class="dias">
+        <label class="dia"><input type="checkbox"><span></span>Lu</label>
+        <label class="dia"><input type="checkbox"><span></span>Ma</label>
+        <label class="dia"><input type="checkbox"><span></span>Mi</label>
+        <label class="dia"><input type="checkbox"><span></span>Ju</label>
+        <label class="dia"><input type="checkbox"><span></span>Vi</label>
+        <label class="dia"><input type="checkbox"><span></span>Sa</label>
+        <label class="dia"><input type="checkbox"><span></span>Do</label>
+      </div>
+
+      <button class="boton-modal" onclick="guardarComercio()">Guardar</button>
+    </div>
+  </div>
+
+  <div class="blur" id="blur-eliminar" onclick="cerrar(event)">
+    <div class="modal modal-eliminar">
+      <p class="modal-titulo">¿Desea eliminar el comercio?</p>
+      <div class="botones-confirmar">
+        <button class="boton-modal" onclick="window.location.href='principal.html'">Si</button>
+        <button class="boton-modal boton-secundario" onclick="cerrar(event)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var imagenNueva = null;
+    var ubicacion = '';
+    var categorias = '';
+    var nombresDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábados', 'Domingos'];
+    var raicesDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+    function marcasDias() {
+      return document.querySelectorAll('.dias input');
+    }
+
+    function abrirEditar() {
+      var encabezado = document.getElementById('header');
+      var texto = document.getElementById('dias-comercio').textContent;
+      var todos = texto.indexOf('Todos') > -1;
+      var marcas = marcasDias();
+      for (var i = 0; i < marcas.length; i++) {
+        marcas[i].checked = todos || texto.indexOf(raicesDias[i]) > -1;
+      }
+      document.getElementById('input-nombre').value = document.getElementById('nombre-comercio').textContent;
+      document.getElementById('input-descripcion').value = document.getElementById('descripcion-comercio').textContent;
+      document.getElementById('input-ubicacion').value = ubicacion;
+      document.getElementById('input-categorias').value = categorias;
+      document.getElementById('input-imagen').value = '';
+      imagenNueva = null;
+      var vista = document.getElementById('vista-imagen');
+      vista.style.backgroundImage = getComputedStyle(encabezado).backgroundImage;
+      vista.classList.add('tiene-imagen');
+      document.getElementById('texto-imagen').textContent = 'Cambiar imagen';
+      document.getElementById('blur-editar').classList.add('mostrar');
+    }
+
+    function abrirEliminar() {
+      document.getElementById('blur-eliminar').classList.add('mostrar');
+    }
+
+    function cerrar(event) {
+      var fondo = event.target.classList.contains('blur');
+      var boton = event.target.closest('.cerrar-modal') || event.target.closest('.boton-secundario');
+      if (fondo || boton) {
+        document.getElementById('blur-editar').classList.remove('mostrar');
+        document.getElementById('blur-eliminar').classList.remove('mostrar');
+      }
+    }
+
+    function vistaPrevia(event) {
+      var archivo = event.target.files[0];
+      if (archivo) {
+        imagenNueva = URL.createObjectURL(archivo);
+        var vista = document.getElementById('vista-imagen');
+        vista.style.backgroundImage = 'url("' + imagenNueva + '")';
+        vista.classList.add('tiene-imagen');
+        document.getElementById('texto-imagen').textContent = 'Cambiar imagen';
+      }
+    }
+
+    function textoDias() {
+      var marcas = marcasDias();
+      var elegidos = [];
+      for (var i = 0; i < marcas.length; i++) {
+        if (marcas[i].checked) {
+          elegidos.push(nombresDias[i]);
+        }
+      }
+      if (elegidos.length === 7) {
+        return 'Todos los días';
+      }
+      if (elegidos.length < 2) {
+        return elegidos.join('');
+      }
+      return elegidos.slice(0, -1).join(', ') + ' y ' + elegidos[elegidos.length - 1];
+    }
+
+    function guardarComercio() {
+      var nombre = document.getElementById('input-nombre').value.trim();
+      var descripcion = document.getElementById('input-descripcion').value.trim();
+      var dias = textoDias();
+      var etiquetaDias = document.getElementById('dias-comercio');
+      var parrafo = document.getElementById('descripcion-comercio');
+
+      if (nombre) {
+        document.getElementById('nombre-comercio').textContent = nombre;
+        document.title = nombre;
+      }
+      parrafo.textContent = descripcion;
+      parrafo.hidden = !descripcion;
+      etiquetaDias.textContent = dias;
+      etiquetaDias.hidden = !dias;
+      ubicacion = document.getElementById('input-ubicacion').value.trim();
+      categorias = document.getElementById('input-categorias').value.trim();
+      if (imagenNueva) {
+        document.getElementById('header').style.backgroundImage = 'url("' + imagenNueva + '")';
+      }
+      document.getElementById('blur-editar').classList.remove('mostrar');
+    }
+  </script>
 </body>
 
 </html>
