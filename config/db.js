@@ -1,13 +1,12 @@
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 
 const conectarBD = async () => {
-  try {
-    await connect(process.env.MONGO_URI);
-    console.log('MongoDB Local conectado correctamente');
-  } catch (error) {
-    console.error('Error al conectar a MongoDB:', error.message);
-    process.exit(1);
+  if (!process.env.MONGO_URI) {
+    throw new Error('No se encontro la variable MONGO_URI');
   }
+  await mongoose.connect(process.env.MONGO_URI);
+
+  console.log('Conexión a MongoDB establecida correctamente');
 };
 
 export default conectarBD;
