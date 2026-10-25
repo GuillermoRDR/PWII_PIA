@@ -1,24 +1,46 @@
-import dotenv from 'dotenv';
-import express, { json } from 'express';
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import session from 'express-session';
+import path from 'node:path';
 import conectarBD from './config/db.js';
-import path from 'path';
-import rutas from './routes/routes.js';
+import rutas from './routes/index.js';
 
 const app = express();
-dotenv.config();
+const PORT = process.env.PORT || 3000;
 
-//Obtiene el puerto desde las variables de entorno
-const PORT = process.env.PORT;
-conectarBD();
+if (!process.env.SESSION_SECRET) {
+  throw new Error('Falta SESSION_SECRET en el archivo .env');
+}
 
-// Middleware para interpretar JSON
-app.use(json());
-
-// Rutas
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  name: 'session',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}))
 app.use(express.static(path.join(process.cwd(), 'views')));
-app.use(rutas);
+app.use('/', rutas);
 
-// Levanta el servidor en el puerto especificado
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+async function iniciarServidor() {
+  try {
+    await conectarBD();
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('Error al iniciar servidor:', error);
+    process.exit(1);
+  }
+}
+
+iniciarServidor();

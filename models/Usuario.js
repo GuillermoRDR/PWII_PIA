@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const usuarioSchema = new mongoose.Schema(
   {
@@ -16,7 +16,8 @@ const usuarioSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      select: false
     },
     localidad: {
       type: String,
@@ -24,7 +25,6 @@ const usuarioSchema = new mongoose.Schema(
     },
     tipoUsuario: {
       type: String,
-      required: true,
       enum: ['cliente', 'comerciante', 'administrador'],
       default: 'cliente'
     },
@@ -50,5 +50,6 @@ const usuarioSchema = new mongoose.Schema(
   }
 );
 
+const Usuario = mongoose.model('Usuario', usuarioSchema);
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+export default Usuario;

@@ -13,34 +13,43 @@
 </head>
 
 <body>
-  <div>
+  <form id="formLogin">
     <div class="registro">
       <h1 class="logo">MR</h1>
       <p class="titulo">Iniciar Sesión</p>
 
       <div class="campo">
-        <label for="correo">Correo electronico</label>
-        <input type="email" id="correo" placeholder="">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" autocomplete="email" required>
       </div>
 
       <div class="campo">
         <label for="contrasena">Contraseña</label>
-        <input type="password" id="contrasena" placeholder="">
+        <input type="password" id="contrasena" name="password" autocomplete="current-password" required>
       </div>
 
       <div class="enlaces">
-        <a>¿Olvidaste tu contraseña?</a>
+        <a href="#" id="recuperarPassword">
+          ¿Olvidaste tu contraseña?
+        </a>
+
         <br>
+
         <span class="registro-cuenta" style="text-align: center;">
           ¿No tienes cuenta?<br>
-          <a href="registro.html">Regístrate Aquí</a>
+          <a href="/registro">Regístrate Aquí</a>
         </span>
       </div>
     </div>
 
-    <button id="ragbot" onclick="window.location.href='principal.html'">Iniciar sesión</button>
-  </div>
+    <button id="ragbot" type="submit">
+      Iniciar sesión
+    </button>
 
+    <p id="mensajeLogin" role="status" aria-live="polite"></p>
+  </form>
+
+  <script type="module" src="/js/login.js"></script>
 </body>
 
 </html>
