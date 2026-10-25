@@ -16,7 +16,7 @@
 
 <body>
   <div id="header">
-    <h1>MercaRed Plus: 1 Semana</h1>
+    <h1 id="titulo-suscripcion">MercaRed Plus: 1 Semana</h1>
   </div>
 
   <br>
@@ -25,11 +25,16 @@
   <div class="ficha">
     <h2 id="tdp">Mercared Plus: 1 Semana</h2>
 
+    <div class="acciones-suscripcion">
+      <button id="editar-suscripcion" onclick="abrirEditar()"><i class="fa-solid fa-pen"></i><span class="txt">Editar suscripción</span></button>
+      <button id="eliminar-suscripcion" onclick="abrirEliminar()"><i class="fa-solid fa-trash"></i><span class="txt">Eliminar suscripción</span></button>
+    </div>
+
     <div class="ficha-top">
 
       <div class="ficha-left">
 
-        <img src="media/images/MRP.png" alt="Taquería Don Pepe" class="ficha-img">
+        <img src="media/images/MRP.png" alt="Taquería Don Pepe" class="ficha-img" id="foto-suscripcion">
 
       </div>
 
@@ -45,13 +50,13 @@
 
         <hr>
 
-        <p class="horario">Costo: $20Mx</p>
+        <p class="horario" id="costo-suscripcion">Costo: $20Mx</p>
 
         <hr>
 
         <div class="ficha-desc">
           <h3>Descripción:</h3>
-          <p>Suscripción que te permite blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah,
+          <p id="descripcion-suscripcion">Suscripción que te permite blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah,
             blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah,
             blah, blah, blah, blah.</p>
         </div>
@@ -62,6 +67,105 @@
   <br>
 
   <button id="ragbot" onclick="window.location.href='tarjeta.html'"> Suscribirse $20Mx</button>
+
+  <div class="blur" id="blur-editar" onclick="cerrar(event)">
+    <div class="modal modal-editar">
+      <button class="cerrar-modal" onclick="cerrar(event)"><i class="fa-solid fa-xmark"></i></button>
+      <p class="modal-titulo">Editar suscripción</p>
+
+      <label class="etiqueta" for="input-nombre">Nombre:</label>
+      <input type="text" id="input-nombre">
+
+      <label class="etiqueta" for="input-costo">Costo (MXN):</label>
+      <input type="number" id="input-costo" min="0" step="any">
+
+      <label class="etiqueta" for="input-descripcion">Descripción:</label>
+      <textarea id="input-descripcion" rows="4"></textarea>
+
+      <span class="etiqueta">Imagen de la suscripción:</span>
+      <label class="subir-imagen" id="vista-imagen" for="input-imagen">
+        <i class="fa-solid fa-camera"></i>
+        <span id="texto-imagen">Subir imagen</span>
+      </label>
+      <input type="file" id="input-imagen" accept="image/*" onchange="vistaPrevia(event)">
+
+      <button class="boton-modal" onclick="guardarSuscripcion()">Guardar</button>
+    </div>
+  </div>
+
+  <div class="blur" id="blur-eliminar" onclick="cerrar(event)">
+    <div class="modal modal-eliminar">
+      <p class="modal-titulo">¿Desea eliminar la suscripción?</p>
+      <div class="botones-confirmar">
+        <button class="boton-modal" onclick="window.location.href='suscripcion.html'">Si</button>
+        <button class="boton-modal boton-secundario" onclick="cerrar(event)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var imagenNueva = null;
+
+    function abrirEditar() {
+      var costo = (document.getElementById('costo-suscripcion').textContent.match(/\d+(\.\d+)?/) || [''])[0];
+      document.getElementById('input-nombre').value = document.getElementById('tdp').textContent;
+      document.getElementById('input-costo').value = costo;
+      document.getElementById('input-descripcion').value = document.getElementById('descripcion-suscripcion').textContent.replace(/\s+/g, ' ').trim();
+      document.getElementById('input-imagen').value = '';
+      imagenNueva = null;
+      var vista = document.getElementById('vista-imagen');
+      vista.style.backgroundImage = 'url("' + document.getElementById('foto-suscripcion').src + '")';
+      vista.classList.add('tiene-imagen');
+      document.getElementById('texto-imagen').textContent = 'Cambiar imagen';
+      document.getElementById('blur-editar').classList.add('mostrar');
+    }
+
+    function abrirEliminar() {
+      document.getElementById('blur-eliminar').classList.add('mostrar');
+    }
+
+    function cerrar(event) {
+      var fondo = event.target.classList.contains('blur');
+      var boton = event.target.closest('.cerrar-modal') || event.target.closest('.boton-secundario');
+      if (fondo || boton) {
+        document.getElementById('blur-editar').classList.remove('mostrar');
+        document.getElementById('blur-eliminar').classList.remove('mostrar');
+      }
+    }
+
+    function vistaPrevia(event) {
+      var archivo = event.target.files[0];
+      if (archivo) {
+        imagenNueva = URL.createObjectURL(archivo);
+        var vista = document.getElementById('vista-imagen');
+        vista.style.backgroundImage = 'url("' + imagenNueva + '")';
+        vista.classList.add('tiene-imagen');
+        document.getElementById('texto-imagen').textContent = 'Cambiar imagen';
+      }
+    }
+
+    function guardarSuscripcion() {
+      var nombre = document.getElementById('input-nombre').value.trim();
+      var costo = parseFloat(document.getElementById('input-costo').value);
+      var descripcion = document.getElementById('input-descripcion').value.trim();
+
+      if (nombre) {
+        document.getElementById('tdp').textContent = nombre;
+        document.getElementById('titulo-suscripcion').textContent = nombre;
+        document.getElementById('foto-suscripcion').alt = nombre;
+        document.title = nombre;
+      }
+      if (!isNaN(costo) && costo >= 0) {
+        document.getElementById('costo-suscripcion').textContent = 'Costo: $' + costo + 'Mx';
+        document.getElementById('ragbot').textContent = ' Suscribirse $' + costo + 'Mx';
+      }
+      document.getElementById('descripcion-suscripcion').textContent = descripcion;
+      if (imagenNueva) {
+        document.getElementById('foto-suscripcion').src = imagenNueva;
+      }
+      document.getElementById('blur-editar').classList.remove('mostrar');
+    }
+  </script>
 </body>
 
 </html>
