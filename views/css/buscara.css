@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
 
-
-
 :root {
   --chile: #D9480F;
   --chile-oscuro: #B83A0A;
@@ -49,7 +47,6 @@ button {
   cursor: pointer;
 }
 
-
 div#header {
   position: relative;
   height: var(--alto-header);
@@ -81,7 +78,6 @@ div#header h1 {
   font-size: clamp(22px, 3.6vw, 32px);
 }
 
-
 button#back {
   position: fixed;
   top: 14px;
@@ -112,14 +108,13 @@ button#back:active {
   transform: scale(0.95);
 }
 
-
 .comercios {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
   justify-content: center;
   gap: 24px;
   padding: 32px 24px;
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -158,24 +153,20 @@ button#back:active {
   border-top: 4px solid var(--cempasuchil);
 }
 
-button#comer1:hover,
-button#comer2:hover {
+.comercio:hover{
   transform: translateY(-4px);
   box-shadow: var(--sombra-alta);
   border-color: var(--chile);
 }
 
-button#comer1:hover img,
-button#comer2:hover img {
+.comercio:hover img{
   transform: scale(1.04);
 }
 
-button#comer1:active,
-button#comer2:active {
+.comercio:active {
   transform: scale(0.98);
   box-shadow: var(--sombra-suave);
 }
-
 
 button.bottom {
   position: fixed;
@@ -240,16 +231,65 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+.catalogo {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.busqueda-comercios {
+  padding: 28px 24px 0;
+}
+
+.busqueda-comercios label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.busqueda-comercios input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--blanco);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.busqueda-comercios input:focus {
+  outline: 2px solid var(--cempasuchil);
+  border-color: var(--chile);
+}
+
+#estado-comercios {
+  padding: 0 24px;
+  color: var(--tinta-suave);
+  font-size: 14px;
+}
+
+.comercio-direccion {
+  margin: 0;
+  padding: 0 16px 8px;
+  color: var(--tinta-suave);
+  font-size: 14px;
+}
+
+.comercio-categorias {
+  margin: auto 0 0;
+  padding: 8px 16px 16px;
+  color: var(--agave);
+  font-size: 13px;
+  font-weight: 700;
+}
 
 @media (max-width: 560px) {
-  div#header h1 {
-    padding-left: 48px;
-    padding-right: 12px;
+  .busqueda-comercios {
+    padding: 20px 16px 0;
   }
 
-  .comercios {
-    grid-template-columns: 1fr;
-    padding: 20px 16px;
-    gap: 16px;
+  #estado-comercios {
+    padding: 0 16px;
   }
 }

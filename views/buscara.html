@@ -23,18 +23,19 @@
   </div>
 
   <br>
-  
-  <div class="comercios">
-    <button class="comercio" onclick="window.location.href='ragcom.html'" id="comer1"><img
-        src="media/images/mercadito.jpg" alt="Mercadito Av. Revolución">
-      <h3 id="titulo">Mercadito Av. Revolución</h3>
-    </button>
 
-    <button class="comercio" onclick="window.location.href='ragcom.html'" id="comer2"><img src="media/images/feria.png"
-        alt="Feria comerciante">
-      <h3 id="titulo">Feria de comerciantes</h3>
-    </button>
-  </div>
+  <section class="catalogo">
+    <div class="busqueda-comercios">
+      <label for="buscar-comercio">Buscar mercados</label>
+      <input type="search" id="buscar-comercio" placeholder="Nombre, ubicación o categoría..." autocomplete="off">
+    </div>
+
+    <p id="estado-comercios" role="status" aria-live="polite">
+      Cargando comercios...
+    </p>
+
+    <div class="comercios" id="lista-comercios"></div>
+  </section>
 
   <br>
 
@@ -49,6 +50,7 @@
   <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'"><i class="fa-solid fa-credit-card"
       style="font-size: 40px"></i>Suscripción</button>
 
+  <script type="module" src="/js/buscarA.js"></script>
 </body>
 
 </html>

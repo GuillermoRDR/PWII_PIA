@@ -12,6 +12,8 @@
   --crema: #FFF6E8;
   --blanco: #FFFFFF;
   --borde: #F1DFC6;
+  --vino: #8d0000;
+  --vino-claro: #c40000;
 
   --fuente-titulos: 'Fraunces', Georgia, serif;
   --fuente-texto: 'DM Sans', system-ui, sans-serif;
@@ -405,6 +407,33 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
+button#cerrarSesion {
+  justify-content: center;
+  padding: 14px 20px;
+  background-color: var(--vino-claro);
+  color: var(--blanco);
+  border: none;
+  box-shadow: var(--sombra-suave);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+button#cerrarSesion h3 {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+button#cerrarSesion:hover {
+  background-color: var(--vino);
+  transform: translateY(-2px);
+}
+
+button#cerrarSesion:active {
+  background-color: var(--cempasuchil);
+  color: var(--tinta);
+  transform: scale(0.98);
+}
 
 @media (max-width: 560px) {
   .opciones {
@@ -416,3 +445,4 @@ input:focus-visible {
     padding: 14px 16px;
   }
 }
+

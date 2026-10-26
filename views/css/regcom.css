@@ -336,6 +336,46 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+.campo input[type="time"] {
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  background-color: var(--crema);
+  color: var(--tinta);
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  border: 1.5px solid var(--borde-campo);
+  border-radius: 14px;
+}
+
+.campo input[type="time"]:focus {
+  outline: none;
+  border-color: var(--chile);
+  box-shadow: 0 0 0 3px var(--cempasuchil-claro);
+}
+
+#preview-imagen[hidden],
+#placeholder-imagen[hidden] {
+  display: none;
+}
+
+#preview-imagen:not([hidden]) {
+  display: block;
+}
+
+#mensajeRegistroComercio {
+  margin: 0;
+  font-size: 14px;
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
+#ragbot:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 
 @media (max-width: 640px) {
   div#header h1 {

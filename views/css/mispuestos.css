@@ -1,0 +1,104 @@
+.panel-solicitudes {
+  margin: 32px 0 0;
+  padding: 22px;
+  border: 1px solid var(--borde, #e9d6bd);
+  border-radius: 18px;
+  background: var(--blanco, #fff)
+}
+
+.panel-solicitudes h2 {
+  font-family: var(--fuente-titulos, serif);
+  font-size: 22px
+}
+
+.solicitud-fila {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borde, #eee)
+}
+
+.dialogo-gestion {
+  width: min(480px, calc(100vw - 32px));
+  max-height: 85vh;
+  overflow: auto;
+  border: 1px solid var(--borde, #ddd);
+  border-radius: 18px;
+  padding: 25px;
+  background: var(--crema, #fff6e8);
+  color: var(--tinta, #2a1b12)
+}
+
+.dialogo-gestion::backdrop {
+  background: #0008
+}
+
+.dialogo-gestion form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px
+}
+
+.dialogo-gestion label {
+  font-weight: 700;
+  font-size: 14px
+}
+
+.dialogo-gestion input,
+.dialogo-gestion select,
+.dialogo-gestion textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid var(--borde, #ddd);
+  border-radius: 10px;
+  background: white;
+  color: #2a1b12;
+  font: inherit
+}
+
+.dialogo-gestion .acciones-gestion {
+  margin-top: 10px
+}
+
+.estado-solicitud-pendiente {
+  color: #9a6400
+}
+
+.estado-solicitud-aprobada {
+  color: var(--agave, #2e7d5b)
+}
+
+.estado-solicitud-rechazada,
+.estado-solicitud-cancelada {
+  color: var(--chile, #d9480f)
+}
+
+.dialogo-gestion {
+  width: min(480px, calc(100vw - 32px));
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  padding: 25px;
+  background: var(--crema);
+  color: var(--tinta);
+}
+
+.dialogo-gestion::backdrop {
+  background: #0008;
+}
+
+.dialogo-gestion form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dialogo-gestion input,
+.dialogo-gestion textarea {
+  padding: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  font: inherit;
+}

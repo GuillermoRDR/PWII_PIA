@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis puestos | MercaRed</title>
+
+  <link rel="stylesheet" href="/css/buscara.css">
+  <link rel="stylesheet" href="/css/miscomercios.css">
+  <link rel="stylesheet" href="/css/mispuestos.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script src="https://kit.fontawesome.com/cb69cc3bd3.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <button id="back" type="button" onclick="window.location.href='registrar.html'">
+    <i class="fa-solid fa-reply"></i>
+  </button>
+
+  <div id="header">
+    <h1>Mis puestos</h1>
+  </div>
+
+  <main class="catalogo">
+    <div class="cabecera-gestion">
+      <div>
+        <h2>Administración de puestos</h2>
+        <p>Consulta y administra tus puestos asociados a mercados.</p>
+      </div>
+
+      <a class="nuevo-mercado" href="/validarcomercio.html">
+        <i class="fa-solid fa-plus"></i>
+        Registrar puesto
+      </a>
+    </div>
+
+    <div class="filtros-gestion">
+      <label for="filtro-puestos">Mostrar:</label>
+      <select id="filtro-puestos">
+        <option value="todos">Todos</option>
+        <option value="activos">Activos</option>
+        <option value="inactivos">Desactivados</option>
+      </select>
+    </div>
+
+    <p id="estado-puestos" role="status" aria-live="polite">
+      Cargando tus puestos...
+    </p>
+
+    <div id="lista-mis-puestos" class="lista-gestion"></div>
+  </main>
+
+  <button class="bottom" id="ini" onclick="window.location.href='principal.html'">
+    <i class="fa-regular fa-house" style="font-size:40px"></i>
+    Inicio
+  </button>
+
+  <button class="bottom" id="bus" onclick="window.location.href='buscar.html'">
+    <i class="fa-solid fa-magnifying-glass" style="font-size:40px"></i>
+    Buscar
+  </button>
+
+  <button class="bottom" id="reg" onclick="window.location.href='registrar.html'">
+    <i class="fa-solid fa-plus" style="font-size:40px"></i>
+    Registrar
+  </button>
+
+  <button class="bottom" id="conf" onclick="window.location.href='configuracion.html'">
+    <i class="fa-solid fa-gear" style="font-size:40px"></i>
+    Configuración
+  </button>
+
+  <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'">
+    <i class="fa-solid fa-credit-card" style="font-size:40px"></i>
+    Suscripción
+  </button>
+
+  <dialog id="dialogo-edicion" class="dialogo-gestion">
+    <form id="form-edicion">
+      <h2>Editar puesto</h2>
+
+      <label for="editar-nombre">Nombre del puesto</label>
+      <input type="text" id="editar-nombre" required>
+
+      <label for="editar-categoria">Categoría</label>
+      <input type="text" id="editar-categoria" required>
+
+      <label for="editar-descripcion">Descripción</label>
+      <textarea id="editar-descripcion" rows="4"></textarea>
+
+      <p id="estado-edicion" role="status"></p>
+
+      <div class="acciones-gestion">
+        <button type="submit" class="boton-gestion boton-ver">
+          Guardar cambios
+        </button>
+
+        <button type="button" id="cerrar-edicion" class="boton-gestion boton-desactivar">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/js/mispuestos.js"></script>
+</body>
+
+</html>

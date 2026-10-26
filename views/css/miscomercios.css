@@ -1,0 +1,229 @@
+body {
+  height: auto;
+  min-height: 100vh;
+  display: block;
+}
+
+.catalogo {
+  width: min(1050px, calc(100% - 32px));
+  margin: 24px auto 100px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cabecera-gestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.cabecera-gestion h2 {
+  margin: 0 0 5px;
+  font-family: var(--fuente-titulos);
+  color: var(--tinta);
+  font-size: clamp(22px, 3vw, 28px);
+}
+
+.cabecera-gestion p {
+  margin: 0;
+  color: var(--tinta-suave);
+  font-size: 14px;
+}
+
+.nuevo-mercado {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  background: var(--chile);
+  color: var(--blanco);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nuevo-mercado:hover {
+  background: var(--chile-oscuro);
+}
+
+.filtros-gestion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filtros-gestion label {
+  color: var(--tinta-suave);
+  font-size: 14px;
+}
+
+.filtros-gestion select {
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--tinta);
+  font: inherit;
+}
+
+#estado-mercados {
+  color: var(--tinta-suave);
+  font-size: 14px;
+}
+
+#estado-mercados:empty {
+  display: none;
+}
+
+.lista-gestion {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.tarjeta-gestion {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+  box-shadow: var(--sombra-suave);
+}
+
+.imagen-mercado {
+  flex: 0 0 38%;
+  min-height: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: var(--cempasuchil-claro);
+  color: var(--chile);
+  font-size: 42px;
+}
+
+.imagen-mercado img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contenido-mercado {
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.contenido-mercado h3 {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+  color: var(--tinta);
+  overflow-wrap: anywhere;
+}
+
+.codigo-mercado,
+.direccion-mercado {
+  margin: 0;
+  font-size: 12px;
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
+.estado-etiqueta {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.estado-etiqueta.activo {
+  background: #E0F1E7;
+  color: var(--agave);
+}
+
+.estado-etiqueta.inactivo {
+  background: var(--cempasuchil-claro);
+  color: var(--tinta-suave);
+}
+
+.acciones-gestion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.boton-gestion {
+  padding: 9px 12px;
+  border: none;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-ver,
+.boton-reactivar {
+  background: var(--chile);
+  color: var(--blanco);
+}
+
+.boton-desactivar {
+  background: var(--crema);
+  color: var(--chile-oscuro);
+}
+
+.boton-gestion:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.sin-mercados {
+  grid-column: 1 / -1;
+  padding: 35px 18px;
+  text-align: center;
+  color: var(--tinta-suave);
+  background: var(--blanco);
+  border: 1px dashed var(--borde);
+  border-radius: 20px;
+}
+
+@media (max-width: 800px) {
+  .lista-gestion {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogo {
+    width: calc(100% - 24px);
+    margin-top: 18px;
+  }
+
+  .tarjeta-gestion {
+    flex-direction: column;
+  }
+
+  .imagen-mercado {
+    min-height: 170px;
+    max-height: 170px;
+  }
+
+  .contenido-mercado {
+    padding: 16px;
+  }
+}

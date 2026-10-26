@@ -19,9 +19,12 @@
     <h1>Registro de Puesto</h1>
   </div>
 
-  <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
+  <button id="back" onclick="window.location.href='/'"><i class="fa-solid fa-reply"></i></button>
 
   <div class="registro">
+    <div class="campo" style="padding:12px 20px"><strong id="mercado-asociado">Validando mercado...</strong>
+      <p id="direccion-asociada"></p><a href="/validarcomercio.html">Cambiar mercado</a>
+    </div>
     <div class="registro-grid">
 
       <div class="columna">
@@ -95,10 +98,26 @@
         </div>
       </div>
 
+      <div class="columna">
+        <div class="campo">
+          <label for="apertura">Hora de apertura:</label>
+          <input type="time" id="apertura" required>
+        </div>
+
+        <div class="campo">
+          <label for="cierre">Hora de cierre:</label>
+          <input type="time" id="cierre" required>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <button id="ragbot" onclick="window.location.href='principal.html'">Registrar puesto</button>
+  <p id="mensaje-registro" role="status" aria-live="polite"></p>
+
+  <button id="ragbot" type="button" disabled>
+    Registrar puesto
+  </button>
 
   <script>
     function previsualizarImagen(event) {
@@ -115,7 +134,7 @@
       reader.readAsDataURL(file);
     }
   </script>
-
+  <script src="/js/registrarPuesto.js"></script>
 </body>
 
 </html>

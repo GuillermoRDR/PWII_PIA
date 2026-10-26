@@ -41,7 +41,7 @@ body {
   padding-bottom: var(--alto-nav);
 }
 
-body > br {
+body>br {
   display: none;
 }
 
@@ -168,118 +168,6 @@ button#opcion3:active {
 }
 
 
-#blur {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(42, 27, 18, 0.55);
-  backdrop-filter: blur(4px);
-}
-
-#blur.mostrar {
-  display: flex;
-  animation: aparecer 0.2s ease;
-}
-
-#modal-codigo {
-  position: relative;
-  box-sizing: border-box;
-  width: 90%;
-  max-width: 440px;
-  padding: 40px 28px 28px;
-  background-color: var(--blanco);
-  border-top: 6px solid var(--cempasuchil);
-  border-radius: 24px;
-  box-shadow: var(--sombra-alta);
-  text-align: center;
-  animation: subir 0.25s ease;
-}
-
-#modal-codigo p {
-  margin: 0 0 16px;
-  font-family: var(--fuente-titulos);
-  font-weight: 600;
-  font-size: clamp(20px, 3vw, 24px);
-  color: var(--tinta);
-}
-
-#input-codigo {
-  width: 100%;
-  box-sizing: border-box;
-  height: 50px;
-  margin-bottom: 20px;
-  padding: 0 20px;
-  background-color: var(--crema);
-  color: var(--tinta);
-  font-family: var(--fuente-texto);
-  font-size: 18px;
-  text-align: center;
-  letter-spacing: 1px;
-  border: 1px solid var(--borde);
-  border-radius: 999px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-#input-codigo:focus {
-  outline: none;
-  background-color: var(--blanco);
-  border-color: var(--chile);
-  box-shadow: 0 0 0 3px var(--cempasuchil-claro);
-}
-
-#buscarb {
-  height: 48px;
-  padding: 0 44px;
-  background-color: var(--chile);
-  color: var(--blanco);
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 999px;
-  box-shadow: var(--sombra-suave);
-  transition: background-color 0.15s ease, transform 0.15s ease;
-}
-
-#buscarb:hover {
-  background-color: var(--chile-oscuro);
-  transform: translateY(-1px);
-}
-
-#buscarb:active {
-  background-color: var(--cempasuchil);
-  color: var(--tinta);
-  transform: scale(0.97);
-}
-
-#closedb {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--crema);
-  color: var(--tinta-suave);
-  font-size: 16px;
-  border-radius: 50%;
-  transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-#closedb:hover {
-  background-color: var(--cempasuchil-claro);
-  color: var(--chile);
-}
-
-#closedb:active {
-  background-color: var(--cempasuchil);
-  color: var(--tinta);
-}
-
 @keyframes aparecer {
   from {
     opacity: 0;
@@ -399,4 +287,26 @@ button#opcion4:active {
   box-shadow: var(--sombra-suave);
   background-color: var(--cempasuchil);
   color: var(--tinta);
+}
+
+.acceso-mis-mercados {
+  grid-column: 2;
+  text-align: center;
+  padding: 12px;
+}
+
+.acceso-mis-mercados a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--chile);
+  font-family: var(--fuente-texto);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.acceso-mis-mercados a:hover {
+  text-decoration: underline;
 }

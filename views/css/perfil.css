@@ -194,7 +194,7 @@ button#back:active {
   color: var(--tinta);
 }
 
-.ficha-desc h3 + p + h3 {
+.ficha-desc h3+p+h3 {
   margin-top: 18px;
 }
 
@@ -363,7 +363,7 @@ button#eliminar-perfil:hover {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  max-width: 440px;
+  max-width: 88%;
   max-height: 92dvh;
   overflow-y: auto;
   padding: 28px 28px 30px;
@@ -469,6 +469,28 @@ button#eliminar-perfil:hover {
   outline-offset: 1px;
 }
 
+#input-edad, 
+#input-localidad, 
+#input-nombre {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 12px 18px;
+  background-color: var(--crema);
+  color: var(--tinta);
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  border: 1px solid var(--borde-campo);
+  border-radius: 24px;
+}
+
+#input-edad:focus, 
+#input-localidad:focus, 
+#input-nombre:focus {
+  outline: 3px solid var(--cempasuchil);
+  outline-offset: 1px;
+}
+
 .boton-modal {
   display: block;
   margin: 8px auto 0;
@@ -515,4 +537,23 @@ button#eliminar-perfil:hover {
 
 .boton-secundario:hover {
   background-color: var(--cempasuchil-claro);
+}
+
+#vista-foto{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  background: #e0e0e0; 
+  color: #777; 
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%;
+}
+
+#foto-perfil{
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #e0e0e0; 
+  color: #777;
 }

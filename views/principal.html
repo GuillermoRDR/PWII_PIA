@@ -17,25 +17,38 @@
 <body>
   <!--<audio autoplay src="media/music/september2015.mp3" type="audio/mpeg" loop></audio>-->
   <div id="header">
-    <h1>Mis Comercios</h1>
+    <h1>MercaRed</h1>
   </div>
 
   <br>
 
-  <button id="prof" onclick="window.location.href='perfil.html'"> Don Javier <img id="prof" src="media/images/jav.jpg">
+  <button id="prof" type="button" onclick="window.location.href='perfil.html'">
+    <span id="nombre-usuario">Mi perfil</span>
+    <img id="foto-usuario" src="/media/images/default.png" alt="Foto de perfil">
   </button>
 
-  <div class="comercios">
-    <button class="comercio" onclick="window.location.href='coma.html'" id="comer1"><img
-        src="media/images/mercadito.jpg" alt="Mercadito Av. Revolución">
-      <h3 id="titulo">Mercadito Av. Revolución</h3>
-    </button>
+  <main class="contenido-principal">
 
-    <button class="comercio" onclick="window.location.href='coma.html'" id="comer2"><img src="media/images/feria.png"
-        alt="Feria comerciante">
-      <h3 id="titulo">Feria de comerciantes</h3>
-    </button>
-  </div>
+    <section class="seccion-inicio">
+      <div class="encabezado-seccion">
+        <h2>Explorar mercados</h2>
+        <a href="buscara.html">Ver todos</a>
+      </div>
+
+      <div id="explorar-comercios" class="comercios"></div>
+      <p id="estado-comercios" class="mensaje-estado"></p>
+    </section>
+
+    <section class="seccion-inicio">
+      <div class="encabezado-seccion">
+        <h2>Puestos recientes</h2>
+      </div>
+
+      <div id="puestos-recientes" class="comercios"></div>
+      <p id="estado-puestos" class="mensaje-estado"></p>
+    </section>
+
+  </main>
 
   <br>
 
@@ -49,6 +62,8 @@
       style="font-size: 40px"></i>Configuración</button>
   <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'"><i class="fa-solid fa-credit-card"
       style="font-size: 40px"></i>Suscripción</button>
+
+  <script src="js/principal.js"></script>
 </body>
 
 </html>

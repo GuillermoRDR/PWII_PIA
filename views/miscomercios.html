@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis mercados | MercaRed</title>
+
+  <link rel="stylesheet" href="/css/buscara.css">
+  <link rel="stylesheet" href="/css/miscomercios.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script src="https://kit.fontawesome.com/cb69cc3bd3.js"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <button id="back" type="button"
+    onclick="window.location.href='registrar.html'">
+    <i class="fa-solid fa-reply"></i>
+  </button>
+
+  <div id="header">
+    <h1>Mis mercados</h1>
+  </div>
+
+  <main class="catalogo">
+    <div class="cabecera-gestion">
+      <div>
+        <h2>Administración de mercados</h2>
+        <p>Consulta y administra los mercados que registraste.</p>
+      </div>
+
+      <a class="nuevo-mercado" href="/regcom.html">
+        <i class="fa-solid fa-plus"></i>
+        Registrar mercado
+      </a>
+    </div>
+
+    <div class="filtros-gestion">
+      <label for="filtro-mercados">Mostrar:</label>
+      <select id="filtro-mercados">
+        <option value="todos">Todos</option>
+        <option value="activos">Activos</option>
+        <option value="inactivos">Desactivados</option>
+      </select>
+    </div>
+
+    <p id="estado-mercados" role="status" aria-live="polite">
+      Cargando tus mercados...
+    </p>
+
+    <div id="lista-mis-mercados" class="lista-gestion"></div>
+  </main>
+
+  <button class="bottom" id="ini"
+    onclick="window.location.href='principal.html'">
+    <i class="fa-regular fa-house" style="font-size:40px"></i>
+    Inicio
+  </button>
+
+  <button class="bottom" id="bus"
+    onclick="window.location.href='buscar.html'">
+    <i class="fa-solid fa-magnifying-glass" style="font-size:40px"></i>
+    Buscar
+  </button>
+
+  <button class="bottom" id="reg"
+    onclick="window.location.href='registrar.html'">
+    <i class="fa-solid fa-plus" style="font-size:40px"></i>
+    Registrar
+  </button>
+
+  <button class="bottom" id="conf"
+    onclick="window.location.href='configuracion.html'">
+    <i class="fa-solid fa-gear" style="font-size:40px"></i>
+    Configuración
+  </button>
+
+  <button class="bottom" id="sus"
+    onclick="window.location.href='suscripcion.html'">
+    <i class="fa-solid fa-credit-card" style="font-size:40px"></i>
+    Suscripción
+  </button>
+
+  <script type="module" src="/js/miscomercios.js"></script>
+</body>
+</html>

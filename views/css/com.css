@@ -630,13 +630,13 @@ button#eliminar-puesto:hover {
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.dia input:checked + span {
+.dia input:checked+span {
   background-color: var(--chile);
   border-color: var(--chile);
   box-shadow: inset 0 0 0 4px var(--blanco);
 }
 
-.dia input:focus-visible + span {
+.dia input:focus-visible+span {
   outline: 3px solid var(--cempasuchil);
   outline-offset: 2px;
 }
@@ -911,12 +911,12 @@ button#eliminar-puesto:hover {
   outline-offset: 1px;
 }
 
-.critica.editando > .critica-cuerpo > .critica-texto,
-.critica.editando > .critica-cuerpo > .critica-acciones {
+.critica.editando>.critica-cuerpo>.critica-texto,
+.critica.editando>.critica-cuerpo>.critica-acciones {
   display: none;
 }
 
-.critica.editando > .critica-cuerpo > .critica-edicion .critica-acciones {
+.critica.editando>.critica-cuerpo>.critica-edicion .critica-acciones {
   display: flex;
 }
 
@@ -1122,3 +1122,8 @@ button#eliminar-puesto:hover {
     height: 160px;
   }
 }
+
+.acciones-puesto[hidden] {
+  display: none !important;
+}
+

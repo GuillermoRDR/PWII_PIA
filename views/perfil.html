@@ -15,41 +15,48 @@
 </head>
 
 <body>
-  <button id="back" onclick="window.location.href='principal.html'"><i class="fa-solid fa-reply"></i></button>
+  <button id="back" onclick="window.location.href='/'"><i class="fa-solid fa-reply"></i></button>
   <div class="ficha">
-    <h2 id="tdp">Don Javier</h2>
+    <h2 id="tdp">Mi perfil</h2>
 
     <div class="ficha-top">
       <div class="ficha-left">
-        <img src="media/images/jav.jpg" alt="Taquería Don Pepe" class="ficha-img" id="foto-perfil">
-        <p class="categoria"><strong id="genero-edad">Hombre, 76 años.</strong> Comida.</p>
-        <p class="palabras-clave">Se unió hace 3 mese. <br> Siguiendo: 3. Seguidores: 253.</p>
+        <img src="media/images/default.png" alt="Fotografía de perfil" class="ficha-img" id="foto-perfil">
+        <p class="categoria">
+          <strong id="genero-edad">Informacion personal</strong>
+        </p>
+        <p class="palabras-clave" id="fecha-registro"></p>
 
         <div class="acciones-perfil">
-          <button id="editar-perfil" onclick="abrirEditar()"><i class="fa-solid fa-pen"></i> Editar perfil</button>
-          <button id="eliminar-perfil" onclick="abrirEliminar()"><i class="fa-solid fa-trash"></i> Eliminar usuario</button>
+          <button id="editar-perfil" type="button">
+            <i class="fa-solid fa-pen"></i> Editar perfil
+          </button>
+          <button id="eliminar-perfil" type="button">
+            <i class="fa-solid fa-trash"></i> Eliminar usuario
+          </button>
+          <button id="cerrar-sesion" type="button">
+            <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+          </button>
         </div>
       </div>
 
       <div class="ficha-right">
         <div class="rating">
-
-          <span id="tipo-usuario">Usuario: Cliente</span>
+          <span id="tipo-usuario"></span>
         </div>
 
         <hr>
 
-        <p class="horario">Localidad: Monterrey, Nuevo León.</p>
+        <p class="horario" id="localidad-perfil"></p>
 
         <hr>
 
         <div class="ficha-desc">
           <h3>Descripción:</h3>
-          <p id="descripcion-perfil">Amante de la comida, dejare las mejores y más honestas reseñas en los puestos de comida.</p>
-
+          <p id="descripcion-perfil"></p>
           <br>
           <h3>Críticas recientes:</h3>
-          <p>Ninguna.</p>
+          <p>AAAAAAh no me da el tiempo que tengo </p>
         </div>
       </div>
     </div>
@@ -68,94 +75,63 @@
   <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'"><i class="fa-solid fa-credit-card"
       style="font-size: 40px"></i>Suscripción</button>
 
-  <div class="blur" id="blur-editar" onclick="cerrar(event)">
-    <div class="modal modal-editar">
-      <button class="cerrar-modal" onclick="cerrar(event)"><i class="fa-solid fa-xmark"></i></button>
+  <div class="blur" id="blur-editar">
+    <form class="modal modal-editar" id="formEditarPerfil">
+      <button class="cerrar-modal" type="button" id="cerrar-editar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
       <p class="modal-titulo">Editar perfil</p>
 
       <div class="campo-foto">
-        <img id="vista-foto" src="media/images/jav.jpg" alt="Foto de perfil">
-        <label for="input-foto" class="boton-foto"><i class="fa-solid fa-camera"></i> Cambiar foto</label>
-        <input type="file" id="input-foto" accept="image/*" onchange="vistaPrevia(event)">
+        <img id="vista-foto" src="media/images/default.png" alt="Vista previa">
+        <label for="input-foto" class="boton-foto">
+          <i class="fa-solid fa-camera"></i> Cambiar foto
+        </label>
+        <input type="file" id="input-foto" name="fotoPerfil" accept="image/jpeg,image/png,image/webp">
       </div>
 
-      <label class="etiqueta" for="select-tipo">Tipo de usuario</label>
-      <select id="select-tipo">
-        <option value="Cliente">Cliente</option>
-        <option value="Comerciante">Comerciante</option>
-      </select>
+      <label class="etiqueta" for="input-nombre">Nombre de usuario</label>
+      <input id="input-nombre" name="nombreUsuario" type="text" required>
+
+      <label class="etiqueta" for="input-localidad">Localidad</label>
+      <input id="input-localidad" name="localidad" type="text">
 
       <label class="etiqueta" for="select-genero">Género</label>
-      <select id="select-genero">
-        <option value="Mujer">Femenino</option>
-        <option value="Hombre">Masculino</option>
-        <option value="No binario">No binario</option>
+      <select id="select-genero" name="genero">
+        <option value="">Prefiero no especificar</option>
+        <option value="femenino">Femenino</option>
+        <option value="masculino">Masculino</option>
+        <option value="no-binario">No binario</option>
       </select>
 
+      <label class="etiqueta" for="input-edad">Edad</label>
+      <input id="input-edad" name="edad" type="number" min="0" step="1">
+
       <label class="etiqueta" for="input-descripcion">Descripción</label>
-      <textarea id="input-descripcion" rows="4"></textarea>
+      <textarea id="input-descripcion" name="descripcionPerfil" rows="4"></textarea>
 
-      <button class="boton-modal" onclick="guardarPerfil()">Guardar</button>
+      <p id="mensaje-editar" role="status" aria-live="polite"></p>
+
+      <button class="boton-modal" type="submit" id="guardar-perfil">
+        Guardar cambios
+      </button>
+      </form>
     </div>
-  </div>
 
-  <div class="blur" id="blur-eliminar" onclick="cerrar(event)">
-    <div class="modal modal-eliminar">
-      <p class="modal-titulo">¿Desea eliminar el usuario?</p>
-      <div class="botones-confirmar">
-        <button class="boton-modal" onclick="window.location.href='Login.html'">Si</button>
-        <button class="boton-modal boton-secundario" onclick="cerrar(event)">No</button>
+    <div class="blur" id="blur-eliminar">
+      <div class="modal modal-eliminar">
+        <p class="modal-titulo">Eliminar cuenta</p>
+        <p>Esta funcionalidad todavía no está disponible.</p>
+
+        <button class="boton-modal boton-secundario" type="button" id="cerrar-eliminar">
+          Cerrar
+        </button>
       </div>
     </div>
   </div>
 
-  <script>
-    var fotoNueva = null;
-
-    function abrirEditar() {
-      var tipo = document.getElementById('tipo-usuario').textContent.replace('Usuario:', '').trim();
-      var genero = document.getElementById('genero-edad').textContent.split(',')[0].trim();
-      document.getElementById('select-tipo').value = tipo;
-      document.getElementById('select-genero').value = genero;
-      document.getElementById('input-descripcion').value = document.getElementById('descripcion-perfil').textContent;
-      document.getElementById('vista-foto').src = document.getElementById('foto-perfil').src;
-      document.getElementById('input-foto').value = '';
-      fotoNueva = null;
-      document.getElementById('blur-editar').classList.add('mostrar');
-    }
-
-    function abrirEliminar() {
-      document.getElementById('blur-eliminar').classList.add('mostrar');
-    }
-
-    function cerrar(event) {
-      var fondo = event.target.classList.contains('blur');
-      var boton = event.target.closest('.cerrar-modal') || event.target.closest('.boton-secundario');
-      if (fondo || boton) {
-        document.getElementById('blur-editar').classList.remove('mostrar');
-        document.getElementById('blur-eliminar').classList.remove('mostrar');
-      }
-    }
-
-    function vistaPrevia(event) {
-      var archivo = event.target.files[0];
-      if (archivo) {
-        fotoNueva = URL.createObjectURL(archivo);
-        document.getElementById('vista-foto').src = fotoNueva;
-      }
-    }
-
-    function guardarPerfil() {
-      var edad = document.getElementById('genero-edad').textContent.split(',')[1];
-      document.getElementById('tipo-usuario').textContent = 'Usuario: ' + document.getElementById('select-tipo').value;
-      document.getElementById('genero-edad').textContent = document.getElementById('select-genero').value + ',' + edad;
-      document.getElementById('descripcion-perfil').textContent = document.getElementById('input-descripcion').value;
-      if (fotoNueva) {
-        document.getElementById('foto-perfil').src = fotoNueva;
-      }
-      document.getElementById('blur-editar').classList.remove('mostrar');
-    }
-  </script>
+  <script type="module" src="/js/perfil.js"></script>
 </body>
 
 </html>

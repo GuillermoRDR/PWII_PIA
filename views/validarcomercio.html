@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vincular puesto | MercaRed</title>
+  <link rel="stylesheet" href="/css/regcom.css">
+  <link rel="stylesheet" href="/css/vincularpuesto.css">
+  <script src="https://kit.fontawesome.com/cb69cc3bd3.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>Registrar puesto</h1>
+  </div><button id="back" onclick="location.href='/registrar.html'"><i class="fa-solid fa-reply"></i></button>
+  <main class="validar-codigo">
+    <h2>¿En qué mercado estará tu puesto?</h2>
+    <p>Ingresa el código que te proporcionó el mercado. Antes de registrar el puesto confirmaremos que sea válido.</p>
+    <form id="form-codigo"><label for="codigo">Código del mercado</label><input id="codigo" placeholder="COM-XXXXXX"
+        maxlength="50" autocomplete="off" required><button type="submit">Validar código</button></form>
+    <p id="mensaje" role="status" aria-live="polite"></p>
+    <div id="resultado" hidden>
+      <h3 id="nombre-mercado"></h3>
+      <p id="direccion-mercado"></p><button id="continuar" type="button">Continuar al registro del puesto</button>
+    </div>
+  </main>
+  <script src="/js/validarComercio.js"></script>
+</body>
+
+</html>
