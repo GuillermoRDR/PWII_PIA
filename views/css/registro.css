@@ -250,6 +250,36 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+button#back {
+  position: fixed;
+  top: 18px;
+  left: 16px;
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blanco);
+  color: var(--chile);
+  font-size: 18px;
+  border-radius: 50%;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+button#back:hover {
+  background-color: var(--cempasuchil-claro);
+  transform: translateX(-2px);
+}
+
+button#back:active {
+  background-color: var(--cempasuchil);
+  color: var(--chile-oscuro);
+  transform: scale(0.95);
+}
+
 
 @media (max-width: 760px) {
   .registro {

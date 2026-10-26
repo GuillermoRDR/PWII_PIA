@@ -20,44 +20,39 @@
   </div>
 
   <br>
-  <button id="back" onclick="window.location.href='coma.html'"><i class="fa-solid fa-reply"></i></button>
+  <button id="back" type="button" onclick="volverAlMercado()">
+    <i class="fa-solid fa-reply"></i>
+  </button>
   <div class="ficha">
-    <h2 id="tdp">Taquería Don Pepe</h2>
+    <h2 id="tdp">Cargando puesto...</h2>
 
     <div class="acciones-puesto">
-      <button id="editar-puesto" onclick="abrirEditar()"><i class="fa-solid fa-pen"></i><span class="txt">Editar puesto</span></button>
-      <button id="eliminar-puesto" onclick="abrirEliminar()"><i class="fa-solid fa-trash"></i><span class="txt">Eliminar puesto</span></button>
+      <button id="editar-puesto" onclick="abrirEditar()"><i class="fa-solid fa-pen"></i><span class="txt">Editar
+          puesto</span></button>
     </div>
 
     <div class="ficha-top">
 
       <div class="ficha-left">
 
-        <img src="media/images/dp.png" alt="Taquería Don Pepe" class="ficha-img" id="foto-puesto">
-        <p class="categoria"><strong>Categoría:</strong> <span id="valor-categoria">Comida</span>.</p>
-        <p class="palabras-clave">Palabras clave: Comida, Desayunos, Cena, Tacos, Comida Rica, Blah, Blah, Blah, Blah,
-          Blah, Blah, Blah, Blah, Blah, Blah.</p>
+        <img src="media/images/default.png" alt="Foto del puesto" class="ficha-img" id="foto-puesto">
+        <p class="categoria"><strong>Categoría:</strong> <span id="valor-categoria"></span>.</p>
+        <p class="palabras-clave" id="palabras-clave-puesto"></p>
       </div>
 
       <div class="ficha-right">
-        <div class="rating">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-          <span>(120)</span>
-        </div>
 
         <hr>
-        <p class="horario" id="dias-puesto">Martes Y Sábado</p>
+        <p class="horario" id="dias-puesto"></p>
         <hr>
 
         <div class="ficha-desc">
           <h3>Descripción:</h3>
-          <p id="descripcion-puesto">Ricos y deliciosos tacos de diferentes guisos, hechos por el gran Don Pepe Torrez, nos ponemos desde las
-            9:00 am y nos quitamos a las 9:00 pm.</p>
+          <p id="descripcion-puesto">Cargando descripción...</p>
         </div>
+
+        <p id="mercado-puesto"></p>
+        <p id="estado-puesto" role="status" aria-live="polite"></p>
       </div>
     </div>
   </div>
@@ -67,47 +62,10 @@
       <h2>Ofertas exclusivas</h2>
       <span class="etiqueta-suscripcion"><i class="fa-solid fa-crown"></i> Con suscripción</span>
     </div>
-
     <div class="ofertas-lista" id="lista-ofertas">
-      <article class="oferta">
-        <img class="oferta-img" src="media/images/dp.png" alt="2x1 en tacos de pastor">
-        <div class="oferta-cuerpo">
-          <h3 class="oferta-nombre">2x1 en tacos de pastor</h3>
-          <p class="oferta-desc">Presenta tu suscripción y llévate dos órdenes de tacos de pastor al precio de una. Válido martes y sábado.</p>
-          <div class="oferta-codigo">
-            <button class="boton-revelar" aria-expanded="false" onclick="alternarCodigo(this)">
-              <i class="fa-solid fa-eye icono-ver"></i><i class="fa-solid fa-eye-slash icono-ocultar"></i>
-              <span>Revelar código</span>
-            </button>
-            <span class="codigo-valor">DONPEPE2X1</span>
-          </div>
-          <div class="oferta-acciones">
-            <button class="oferta-btn" onclick="editarOferta(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="oferta-btn oferta-btn-eliminar" onclick="eliminarOferta(this)"><i class="fa-solid fa-trash"></i> Eliminar</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="oferta">
-        <img class="oferta-img" src="media/images/dp.png" alt="Refresco gratis">
-        <div class="oferta-cuerpo">
-          <h3 class="oferta-nombre">Refresco gratis</h3>
-          <p class="oferta-desc">Un refresco de 600 ml sin costo con cualquier orden de cinco tacos o más.</p>
-          <div class="oferta-codigo">
-            <button class="boton-revelar" aria-expanded="false" onclick="alternarCodigo(this)">
-              <i class="fa-solid fa-eye icono-ver"></i><i class="fa-solid fa-eye-slash icono-ocultar"></i>
-              <span>Revelar código</span>
-            </button>
-            <span class="codigo-valor">REFRESCOGRATIS</span>
-          </div>
-          <div class="oferta-acciones">
-            <button class="oferta-btn" onclick="editarOferta(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="oferta-btn oferta-btn-eliminar" onclick="eliminarOferta(this)"><i class="fa-solid fa-trash"></i> Eliminar</button>
-          </div>
-        </div>
-      </article>
-
-      <p class="sin-ofertas" id="sin-ofertas" hidden>Aún no hay ofertas exclusivas.</p>
+      <p class="sin-ofertas" id="sin-ofertas">
+        Este puesto todavía no tiene ofertas publicadas.
+      </p>
     </div>
   </section>
 
@@ -126,22 +84,27 @@
             <a class="critica-nombre" href="perfil.html">Don Javier</a>
             <span class="critica-tiempo">hace 2 días</span>
           </div>
-          <p class="critica-texto">Los tacos de pastor están buenísimos y se nota que las tortillas son hechas a mano. El sábado regreso por más.</p>
+          <p class="critica-texto">Los tacos de pastor están buenísimos y se nota que las tortillas son hechas a mano.
+            El sábado regreso por más.</p>
           <div class="critica-acciones">
             <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
+                class="fa-solid fa-trash"></i> Eliminar</button>
           </div>
-          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i class="fa-solid fa-chevron-down"></i></button>
+          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i
+              class="fa-solid fa-chevron-down"></i></button>
           <div class="respuestas">
             <div class="respuesta">
-              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html" aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
+              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html"
+                aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
               <div class="critica-cuerpo">
                 <div class="critica-cabecera">
                   <a class="critica-nombre" href="perfil.html">Don Pepe Torrez</a>
                   <span class="etiqueta-dueno">Dueño</span>
                   <span class="critica-tiempo">hace 2 días</span>
                 </div>
-                <p class="respuesta-texto">¡Gracias, Don Javier! Aquí lo esperamos el sábado con su orden de siempre.</p>
+                <p class="respuesta-texto">¡Gracias, Don Javier! Aquí lo esperamos el sábado con su orden de siempre.
+                </p>
               </div>
             </div>
           </div>
@@ -157,15 +120,19 @@
             <a class="critica-nombre" href="perfil.html">María Fernanda R.</a>
             <span class="critica-tiempo">hace 5 días</span>
           </div>
-          <p class="critica-texto">Buen sabor y buen precio. Eso sí, a la hora de la comida hay bastante fila, vayan temprano.</p>
+          <p class="critica-texto">Buen sabor y buen precio. Eso sí, a la hora de la comida hay bastante fila, vayan
+            temprano.</p>
           <div class="critica-acciones">
             <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
+                class="fa-solid fa-trash"></i> Eliminar</button>
           </div>
-          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i class="fa-solid fa-chevron-down"></i></button>
+          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i
+              class="fa-solid fa-chevron-down"></i></button>
           <div class="respuestas">
             <div class="respuesta">
-              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html" aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
+              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html"
+                aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
               <div class="critica-cuerpo">
                 <div class="critica-cabecera">
                   <a class="critica-nombre" href="perfil.html">Don Pepe Torrez</a>
@@ -191,7 +158,8 @@
           <p class="critica-texto">Los desayunos son lo mejor del puesto, el de chorizo con huevo nunca falla.</p>
           <div class="critica-acciones">
             <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
+                class="fa-solid fa-trash"></i> Eliminar</button>
           </div>
         </div>
       </article>
@@ -547,6 +515,7 @@
       document.getElementById('sin-ofertas').hidden = document.querySelectorAll('.oferta').length > 0;
     }
   </script>
+  <script src="js/com.js"></script>
 </body>
 
 </html>

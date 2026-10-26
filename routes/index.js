@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import path from 'node:path';
 import usuariosRouter from './rUsuario.js';
+import comerciosRouter from './rComercio.js';
+import puestosRouter from './rPuesto.js';
 
 const rutas = Router();
 const viewsPath = path.join(process.cwd(), 'views');
@@ -18,5 +20,7 @@ rutas.get('/registro', (req, res) => {
 });
 
 rutas.use('/api/usuario', usuariosRouter);
+rutas.use('/api/comercios', comerciosRouter);
+rutas.use('/api/puestos', puestosRouter);
 
 export default rutas;

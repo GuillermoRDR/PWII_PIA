@@ -234,7 +234,7 @@ export async function obtenerPerfilUsuario(req, res) {
       });
     }
 
-    return res.status(200).json(usuario);
+    return res.status(200).json(await prepararUsuario(usuario));
 
   } catch (error) {
     console.error('Error al obtener perfil:', error);
@@ -259,4 +259,144 @@ export function cerrarSesionUsuario(req, res) {
       mensaje: 'Sesión cerrada correctamente.'
     });
   });
+}
+
+export async function actualizarPerfilUsuario(req, res) {
+  try {
+    const camposPermitidos = [
+      'nombreUsuario',
+      'localidad',
+      'descripcionPerfil',
+      'genero',
+      'edad'
+    ];
+
+    const cambios = {};
+
+    for (const campo of camposPermitidos) {
+      if (req.body[campo] !== undefined) {
+        cambios[campo] = req.body[campo];
+      }
+    }
+
+    if (cambios.nombreUsuario !== undefined) {
+      if (
+        typeof cambios.nombreUsuario !== 'string' ||
+        !cambios.nombreUsuario.trim()
+      ) {
+        return res.status(400).json({
+          error: 'El nombre de usuario no puede estar vacío.'
+        });
+      }
+
+      cambios.nombreUsuario = cambios.nombreUsuario.trim();
+    }
+
+    for (const campo of ['localidad', 'descripcionPerfil', 'genero']) {
+      if (cambios[campo] !== undefined) {
+        if (typeof cambios[campo] !== 'string') {
+          return res.status(400).json({
+            error: `El campo ${campo} debe ser texto.`
+          });
+        }
+
+        cambios[campo] = cambios[campo].trim();
+      }
+    }
+
+    if (cambios.edad !== undefined) {
+      if (cambios.edad === '') {
+        cambios.edad = null;
+      } else {
+        const edad = Number(cambios.edad);
+
+        if (!Number.isInteger(edad) || edad < 0) {
+          return res.status(400).json({
+            error: 'La edad debe ser un entero no negativo.'
+          });
+        }
+
+        cambios.edad = edad;
+      }
+    }
+
+    if (req.file) {
+      const extensiones = {
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/webp': 'webp'
+      };
+
+      const extension = extensiones[req.file.mimetype];
+
+      if (!extension) {
+        return res.status(400).json({
+          error: 'Formato de imagen no permitido.'
+        });
+      }
+
+      const nombreArchivo = `perfiles/${randomUUID()}.${extension}`;
+
+      await bucket.file(nombreArchivo).save(req.file.buffer, {
+        metadata: {
+          contentType: req.file.mimetype
+        }
+      });
+
+      cambios.fotoPerfil = nombreArchivo;
+    }
+
+    const usuario = await Usuario.findByIdAndUpdate(
+      req.session.usuarioId,
+      { $set: cambios },
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    if (!usuario) {
+      return res.status(404).json({
+        error: 'Usuario no encontrado.'
+      });
+    }
+
+    return res.status(200).json({
+      mensaje: 'Perfil actualizado correctamente.',
+      usuario: await prepararUsuario(usuario)
+    });
+
+  } catch (error) {
+    console.error('Error al actualizar perfil:', error);
+
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        error: 'Los datos proporcionados no son válidos.'
+      });
+    }
+
+    return res.status(500).json({
+      error: 'No se pudo actualizar el perfil.'
+    });
+  }
+}
+
+async function prepararUsuario(usuario) {
+  const datos = usuario.toObject();
+
+  delete datos.password;
+
+  datos.fotoPerfilUrl = null;
+
+  if (datos.fotoPerfil) {
+    const [url] = await bucket.file(datos.fotoPerfil).getSignedUrl({
+      version: 'v4',
+      action: 'read',
+      expires: Date.now() + 15 * 60 * 1000
+    });
+
+    datos.fotoPerfilUrl = url;
+  }
+
+  return datos;
 }

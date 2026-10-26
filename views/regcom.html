@@ -20,94 +20,76 @@
 
   <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
 
-  <div class="registro">
+  <form class="registro" id="formRegistroComercio" enctype="multipart/form-data">
     <div class="registro-grid">
 
       <div class="campo">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" placeholder="">
+        <label for="nombre">Nombre del mercado:</label>
+        <input type="text" id="nombre" name="nombreComercio" required maxlength="120">
       </div>
 
       <div class="campo campo-desc">
         <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion"></textarea>
+        <textarea id="descripcion" name="descripcionComercio"></textarea>
       </div>
 
       <div class="campo">
         <label for="ubicacion">Ubicación:</label>
-        <input type="text" id="ubicacion" placeholder="">
+        <input type="text" id="ubicacion" name="direccion" required>
       </div>
 
       <div class="campo campo-cat">
         <label for="categorias">Categorías:</label>
-        <textarea id="categorias"></textarea>
+        <textarea id="categorias" placeholder="Alimentos, ropa, artesanías"></textarea>
+        <small>Separa las categorías mediante comas.</small>
       </div>
 
       <div class="campo campo-imagen">
         <label for="imagen">Imagen del comercio:</label>
-        <div class="imagen-upload" onclick="document.getElementById('imagen').click()">
-          <img id="preview-imagen" src="" alt="" style="display: none;">
-          <div id="placeholder-imagen">
+
+        <label class="imagen-upload" for="imagen">
+          <img id="preview-imagen" alt="Vista previa" hidden>
+          <span id="placeholder-imagen">
             <i class="fa-solid fa-camera"></i>
             <span>Subir imagen</span>
-          </div>
-        </div>
-        <input type="file" id="imagen" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
+          </span>
+        </label>
+
+        <input type="file" id="imagen" name="imagenComercio" accept="image/jpeg,image/png,image/webp" hidden>
       </div>
 
       <div class="campo campo-dias">
         <label>Días que se pone:</label>
+
         <div class="dias">
-          <div class="dia">
-            <input type="checkbox" id="lu">
-            <label for="lu">Lu</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="ma">
-            <label for="ma">Ma</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="mi">
-            <label for="mi">Mi</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="ju">
-            <label for="ju">Ju</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="vi">
-            <label for="vi">Vi</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="sa">
-            <label for="sa">Sa</label>
-          </div>
-          <div class="dia">
-            <input type="checkbox" id="do">
-            <label for="do">Do</label>
-          </div>
+          <div class="dia"><input type="checkbox" id="lu" value="Lunes"><label for="lu">Lu</label></div>
+          <div class="dia"><input type="checkbox" id="ma" value="Martes"><label for="ma">Ma</label></div>
+          <div class="dia"><input type="checkbox" id="mi" value="Miércoles"><label for="mi">Mi</label></div>
+          <div class="dia"><input type="checkbox" id="ju" value="Jueves"><label for="ju">Ju</label></div>
+          <div class="dia"><input type="checkbox" id="vi" value="Viernes"><label for="vi">Vi</label></div>
+          <div class="dia"><input type="checkbox" id="sa" value="Sábado"><label for="sa">Sa</label></div>
+          <div class="dia"><input type="checkbox" id="do" value="Domingo"><label for="do">Do</label></div>
         </div>
       </div>
+
+      <div class="campo">
+        <label for="apertura">Hora de apertura:</label>
+        <input type="time" id="apertura" value="09:00" required>
+      </div>
+
+      <div class="campo">
+        <label for="cierre">Hora de cierre:</label>
+        <input type="time" id="cierre" value="18:00" required>
+      </div>
+
     </div>
-  </div>
 
-  <button id="ragbot" onclick="window.location.href='principal.html'">Registrar comercio</button>
+    <p id="mensajeRegistroComercio" role="status" aria-live="polite"></p>
 
-  <script>
-    function previsualizarImagen(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.getElementById('preview-imagen');
-        const placeholder = document.getElementById('placeholder-imagen');
-        img.src = e.target.result;
-        img.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-  </script>
+    <button id="ragbot" type="submit">Registrar comercio</button>
+  </form>
+
+  <script type="module" src="/js/registrarComercio.js"></script>
 </body>
 
 </html>
