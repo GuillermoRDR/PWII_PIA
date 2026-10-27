@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const suscripcionSchema = new mongoose.Schema(
   {
@@ -32,6 +32,10 @@ const suscripcionSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    imagenSuscripcion: {
+    type: String,
+    default: ''
+  },
     activa: {
       type: Boolean,
       default: true
@@ -42,4 +46,6 @@ const suscripcionSchema = new mongoose.Schema(
   }
 );
   
-  module.exports = mongoose.model('Suscripcion', suscripcionSchema);
+const Suscripcion = mongoose.model('Suscripcion', suscripcionSchema);
+
+export default Suscripcion;

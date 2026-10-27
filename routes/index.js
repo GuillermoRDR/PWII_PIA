@@ -3,6 +3,7 @@ import path from 'node:path';
 import usuariosRouter from './rUsuario.js';
 import comerciosRouter from './rComercio.js';
 import puestosRouter from './rPuesto.js';
+import suscripcionesRouter from './rSuscripcion.js';
 
 const rutas = Router();
 const viewsPath = path.join(process.cwd(), 'views');

@@ -26,32 +26,32 @@
 
       <div class="columna">
         <div class="campo">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" placeholder="">
+          <label for="titulo">Nombre:</label>
+          <input type="text" id="titulo" name="titulo" placeholder="">
         </div>
 
         <div class="campo">
-          <label for="costo">Costo (MXN):</label>
-          <input type="text" id="costo" inputmode="decimal" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+          <label for="precio">Costo (MXN):</label>
+          <input type="text" id="precio" name="precio" inputmode="decimal" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
         </div>
       </div>
 
       <div class="columna">
         <div class="campo campo-desc">
           <label for="descripcion">Descripción:</label>
-          <textarea id="descripcion"></textarea>
+          <textarea id="descripcion" name="descripcion"></textarea>
         </div>
 
         <div class="campo campo-imagen">
-          <label for="imagen">Imagen de la suscripción:</label>
-          <div class="imagen-upload" onclick="document.getElementById('imagen').click()">
+          <label for="imagenSuscripcion">Imagen de la suscripción:</label>
+          <div class="imagen-upload" onclick="document.getElementById('imagenSuscripcion').click()">
             <img id="preview-imagen" src="" alt="" style="display: none;">
             <div id="placeholder-imagen">
               <i class="fa-solid fa-camera"></i>
               <span>Subir imagen</span>
             </div>
           </div>
-          <input type="file" id="imagen" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
+          <input type="file" id="imagenSuscripcion" name="imagenSuscripcion" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
         </div>
       </div>
     </div>
