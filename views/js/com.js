@@ -31,11 +31,6 @@ function mostrarDatosPuesto(puesto) {
   elemento('descripcion-puesto').textContent =
     puesto.descripcionPuesto || 'Sin descripción.';
 
-  elemento('palabras-clave-puesto').textContent =
-    (puesto.palabrasClave || []).length
-      ? `Palabras clave: ${puesto.palabrasClave.join(', ')}`
-      : 'Sin palabras clave.';
-
   elemento('dias-puesto').textContent =
     (puesto.horario || []).length
       ? puesto.horario

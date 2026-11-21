@@ -218,8 +218,7 @@ function mostrarPuestosMercado() {
     const texto = [
       puesto.nombrePuesto,
       puesto.categoria,
-      puesto.descripcionPuesto,
-      ...(puesto.palabrasClave || [])
+      puesto.descripcionPuesto
     ]
       .filter(Boolean)
       .join(' ')
