@@ -15,10 +15,12 @@
 </head>
 
 <body>
-  <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
+  <button id="back" type="button" onclick="history.back()"><i class="fa-solid fa-reply"></i></button>
 
   <div class="registro">
     <p class="titulo">Pago con Tarjeta</p>
+
+    <p id="resumen-pago">Cargando suscripción...</p>
 
     <div class="campo">
       <label for="nombre-tarjeta">Nombre en la tarjeta</label>
@@ -43,8 +45,11 @@
     </div>
   </div>
 
-  <button id="ragbot" onclick="window.location.href='principal.html'">Comprar</button>
+  <p id="mensaje-pago" role="status" aria-live="polite"></p>
 
+  <button id="ragbot" type="button" disabled>Comprar</button>
+
+  <script src="js/tarjeta.js"></script>
 </body>
 
 </html>

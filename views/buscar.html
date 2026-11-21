@@ -49,11 +49,22 @@
 
       <p>Ingrese el código:</p>
       <input type="text" id="input-codigo" placeholder="">
-      <button id="buscarb" onclick="window.location.href='ragcom.html'">Buscar</button>
+      <button id="buscarb" onclick="buscarPorCodigo()">Buscar</button>
     </div>
   </div>
 
   <script>
+    function buscarPorCodigo() {
+      const codigo = document.getElementById('input-codigo').value.trim();
+
+      if (!codigo) {
+        document.getElementById('input-codigo').focus();
+        return;
+      }
+
+      window.location.href = `ragcom.html?codigo=${encodeURIComponent(codigo)}`;
+    }
+
     function extend() {
       document.getElementById('blur').classList.add('mostrar');
     }

@@ -1,6 +1,6 @@
 const form = document.getElementById('formRegistroSuscripcion');
 const mensaje = document.getElementById('mensajeRegistroSuscripcion');
-const boton = document.getElementById('regsus');
+const boton = document.getElementById('ragbot');
 
 const inputImagen = document.getElementById('imagen');
 const previewImagen = document.getElementById('preview-imagen');

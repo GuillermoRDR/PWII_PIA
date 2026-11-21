@@ -21,60 +21,56 @@
 
   <button id="back" onclick="window.location.href='registrar.html'"><i class="fa-solid fa-reply"></i></button>
 
-  <div class="registro">
+  <form class="registro" id="formRegistroSuscripcion" enctype="multipart/form-data">
     <div class="registro-grid">
 
       <div class="columna">
         <div class="campo">
           <label for="titulo">Nombre:</label>
-          <input type="text" id="titulo" name="titulo" placeholder="">
+          <input type="text" id="titulo" name="titulo" required maxlength="120">
         </div>
 
         <div class="campo">
           <label for="precio">Costo (MXN):</label>
-          <input type="text" id="precio" name="precio" inputmode="decimal" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+          <input type="text" id="precio" name="precio" inputmode="decimal" required
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+        </div>
+
+        <div class="campo">
+          <label for="duracion">Duración (días):</label>
+          <input type="number" id="duracion" name="duracion" min="1" step="1" required>
         </div>
       </div>
 
       <div class="columna">
         <div class="campo campo-desc">
           <label for="descripcion">Descripción:</label>
-          <textarea id="descripcion" name="descripcion"></textarea>
+          <textarea id="descripcion" name="descripcion" required></textarea>
         </div>
 
         <div class="campo campo-imagen">
-          <label for="imagenSuscripcion">Imagen de la suscripción:</label>
-          <div class="imagen-upload" onclick="document.getElementById('imagenSuscripcion').click()">
-            <img id="preview-imagen" src="" alt="" style="display: none;">
-            <div id="placeholder-imagen">
+          <label for="imagen">Imagen de la suscripción:</label>
+
+          <label class="imagen-upload" for="imagen">
+            <img id="preview-imagen" alt="Vista previa" hidden>
+            <span id="placeholder-imagen">
               <i class="fa-solid fa-camera"></i>
               <span>Subir imagen</span>
-            </div>
-          </div>
-          <input type="file" id="imagenSuscripcion" name="imagenSuscripcion" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
+            </span>
+          </label>
+
+          <input type="file" id="imagen" name="imagenSuscripcion" accept="image/jpeg,image/png,image/webp" hidden>
         </div>
       </div>
+
     </div>
-  </div>
 
-  <button id="ragbot" onclick="window.location.href='principal.html'">Registrar suscripción</button>
+    <p id="mensajeRegistroSuscripcion" role="status" aria-live="polite"></p>
 
-  <script>
-    function previsualizarImagen(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.getElementById('preview-imagen');
-        const placeholder = document.getElementById('placeholder-imagen');
-        img.src = e.target.result;
-        img.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-  </script>
+    <button id="ragbot" type="submit">Registrar suscripción</button>
+  </form>
 
+  <script type="module" src="/js/registrarSuscripcion.js"></script>
 </body>
 
 </html>

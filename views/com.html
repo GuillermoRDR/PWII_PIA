@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tacos Don Pepe</title>
+  <title>Puesto</title>
 
   <link href="css/com.css" rel="stylesheet">
 
@@ -16,7 +16,7 @@
 
 <body>
   <div id="header">
-    <h1 id="titulo-puesto">Taquería Don Pepe</h1>
+    <h1 id="titulo-puesto">Puesto</h1>
   </div>
 
   <br>
@@ -61,6 +61,9 @@
     <div class="ofertas-cabecera">
       <h2>Ofertas exclusivas</h2>
       <span class="etiqueta-suscripcion"><i class="fa-solid fa-crown"></i> Con suscripción</span>
+      <a class="oferta-btn" id="nueva-oferta" href="regof.html" style="display: none; margin-left: auto;">
+        <i class="fa-solid fa-plus"></i> Nueva oferta
+      </a>
     </div>
     <div class="ofertas-lista" id="lista-ofertas">
       <p class="sin-ofertas" id="sin-ofertas">
@@ -245,45 +248,55 @@
     </div>
   </div>
 
-  <div class="blur" id="blur-oferta" onclick="cerrar(event)">
-    <div class="modal modal-editar">
-      <button class="cerrar-modal" onclick="cerrar(event)"><i class="fa-solid fa-xmark"></i></button>
+  <div class="blur" id="blur-oferta">
+    <form class="modal modal-editar" id="formEditarOferta">
+      <button class="cerrar-modal" id="cerrar-oferta" type="button"><i class="fa-solid fa-xmark"></i></button>
       <p class="modal-titulo">Editar oferta</p>
 
       <label class="etiqueta" for="input-oferta-nombre">Nombre:</label>
-      <input type="text" id="input-oferta-nombre">
+      <input type="text" id="input-oferta-nombre" maxlength="120" required>
 
       <label class="etiqueta" for="input-oferta-descripcion">Descripción:</label>
-      <textarea id="input-oferta-descripcion" rows="3"></textarea>
+      <textarea id="input-oferta-descripcion" rows="3" required></textarea>
 
       <label class="etiqueta" for="input-oferta-codigo">Código:</label>
       <input type="text" id="input-oferta-codigo">
+
+      <label class="etiqueta" for="input-oferta-descuento">Descuento (%):</label>
+      <input type="number" id="input-oferta-descuento" min="0" max="100" step="any">
+
+      <label class="etiqueta" for="input-oferta-fecha">Vence el (opcional):</label>
+      <input type="date" id="input-oferta-fecha">
+
+      <label class="etiqueta" for="input-oferta-exclusiva">
+        <input type="checkbox" id="input-oferta-exclusiva"> Solo con suscripción activa
+      </label>
 
       <span class="etiqueta">Imagen de la oferta:</span>
       <label class="subir-imagen" id="vista-imagen-oferta" for="input-imagen-oferta">
         <i class="fa-solid fa-camera"></i>
         <span id="texto-imagen-oferta">Subir imagen</span>
       </label>
-      <input type="file" id="input-imagen-oferta" accept="image/*" onchange="vistaPreviaOferta(event)">
+      <input type="file" id="input-imagen-oferta" accept="image/jpeg,image/png,image/webp">
 
-      <button class="boton-modal" onclick="guardarOferta()">Guardar</button>
-    </div>
+      <p id="mensaje-oferta" role="status" aria-live="polite"></p>
+
+      <button class="boton-modal" id="guardar-oferta" type="submit">Guardar cambios</button>
+    </form>
   </div>
 
-  <div class="blur" id="blur-oferta-eliminar" onclick="cerrar(event)">
+  <div class="blur" id="blur-oferta-eliminar">
     <div class="modal modal-eliminar">
-      <p class="modal-titulo">¿Desea eliminar la oferta?</p>
+      <p class="modal-titulo">¿Desactivar esta oferta?</p>
+      <p>Dejará de mostrarse a los clientes. Podrás reactivarla después.</p>
       <div class="botones-confirmar">
-        <button class="boton-modal" onclick="confirmarEliminarOferta()">Si</button>
-        <button class="boton-modal boton-secundario" onclick="cerrar(event)">No</button>
+        <button class="boton-modal" id="confirmar-baja-oferta" type="button">Sí, desactivar</button>
+        <button class="boton-modal boton-secundario" id="cancelar-baja-oferta" type="button">Cancelar</button>
       </div>
     </div>
   </div>
 
   <script>
-    var ofertaEnEdicion = null;
-    var ofertaPorEliminar = null;
-    var imagenOfertaNueva = null;
     var criticaPorEliminar = null;
     var imagenNueva = null;
     var nombresDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -322,11 +335,7 @@
         document.getElementById('blur-editar').classList.remove('mostrar');
         document.getElementById('blur-eliminar').classList.remove('mostrar');
         document.getElementById('blur-critica').classList.remove('mostrar');
-        document.getElementById('blur-oferta').classList.remove('mostrar');
-        document.getElementById('blur-oferta-eliminar').classList.remove('mostrar');
         criticaPorEliminar = null;
-        ofertaEnEdicion = null;
-        ofertaPorEliminar = null;
       }
     }
 
@@ -447,72 +456,6 @@
       criticaPorEliminar = null;
       document.getElementById('blur-critica').classList.remove('mostrar');
       document.getElementById('sin-criticas').hidden = document.querySelectorAll('.critica').length > 0;
-    }
-
-    function alternarCodigo(boton) {
-      var valor = boton.closest('.oferta-codigo').querySelector('.codigo-valor');
-      var visible = valor.classList.toggle('visible');
-      boton.setAttribute('aria-expanded', visible ? 'true' : 'false');
-      boton.querySelector('span').textContent = visible ? 'Ocultar código' : 'Revelar código';
-    }
-
-    function editarOferta(boton) {
-      ofertaEnEdicion = boton.closest('.oferta');
-      imagenOfertaNueva = null;
-      document.getElementById('input-oferta-nombre').value = ofertaEnEdicion.querySelector('.oferta-nombre').textContent;
-      document.getElementById('input-oferta-descripcion').value = ofertaEnEdicion.querySelector('.oferta-desc').textContent;
-      document.getElementById('input-oferta-codigo').value = ofertaEnEdicion.querySelector('.codigo-valor').textContent;
-      document.getElementById('input-imagen-oferta').value = '';
-      var vista = document.getElementById('vista-imagen-oferta');
-      vista.style.backgroundImage = 'url("' + ofertaEnEdicion.querySelector('.oferta-img').src + '")';
-      vista.classList.add('tiene-imagen');
-      document.getElementById('texto-imagen-oferta').textContent = 'Cambiar imagen';
-      document.getElementById('blur-oferta').classList.add('mostrar');
-    }
-
-    function vistaPreviaOferta(event) {
-      var archivo = event.target.files[0];
-      if (archivo) {
-        imagenOfertaNueva = URL.createObjectURL(archivo);
-        var vista = document.getElementById('vista-imagen-oferta');
-        vista.style.backgroundImage = 'url("' + imagenOfertaNueva + '")';
-        vista.classList.add('tiene-imagen');
-        document.getElementById('texto-imagen-oferta').textContent = 'Cambiar imagen';
-      }
-    }
-
-    function guardarOferta() {
-      if (ofertaEnEdicion) {
-        var nombre = document.getElementById('input-oferta-nombre').value.trim();
-        var codigo = document.getElementById('input-oferta-codigo').value.trim();
-        if (nombre) {
-          ofertaEnEdicion.querySelector('.oferta-nombre').textContent = nombre;
-          ofertaEnEdicion.querySelector('.oferta-img').alt = nombre;
-        }
-        ofertaEnEdicion.querySelector('.oferta-desc').textContent = document.getElementById('input-oferta-descripcion').value.trim();
-        if (codigo) {
-          ofertaEnEdicion.querySelector('.codigo-valor').textContent = codigo;
-        }
-        if (imagenOfertaNueva) {
-          ofertaEnEdicion.querySelector('.oferta-img').src = imagenOfertaNueva;
-        }
-      }
-      ofertaEnEdicion = null;
-      document.getElementById('blur-oferta').classList.remove('mostrar');
-    }
-
-    function eliminarOferta(boton) {
-      ofertaPorEliminar = boton.closest('.oferta');
-      document.getElementById('blur-oferta-eliminar').classList.add('mostrar');
-    }
-
-    function confirmarEliminarOferta() {
-      if (ofertaPorEliminar) {
-        ofertaPorEliminar.remove();
-      }
-      ofertaPorEliminar = null;
-      document.getElementById('blur-oferta-eliminar').classList.remove('mostrar');
-      document.getElementById('sin-ofertas').hidden = document.querySelectorAll('.oferta').length > 0;
     }
   </script>
   <script src="js/com.js"></script>

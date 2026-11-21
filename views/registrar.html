@@ -22,31 +22,35 @@
   <br>
 
   <div class="opciones">
-    <button class="opcion" onclick="window.location.href='regcom.html'" id="opcion1">
+    <button class="opcion" onclick="window.location.href='regcom.html'" id="opcion1" style="display: none;">
       <h3>Comercio</h3>
     </button>
 
-    <button class="opcion" onclick="window.location.href='regpues.html'" id="opcion2">
+    <button class="opcion" onclick="window.location.href='regpues.html'" id="opcion2" style="display: none;">
       <h3>Puesto</h3>
     </button>
 
-    <button class="opcion" onclick="window.location.href='regof.html'" id="opcion3">
+    <button class="opcion" onclick="window.location.href='regof.html'" id="opcion3" style="display: none;">
       <h3>Oferta</h3>
     </button>
 
-    <button class="opcion" onclick="window.location.href='regsus.html'" id="opcion4">
+    <button class="opcion" onclick="window.location.href='regsus.html'" id="opcion4" style="display: none;">
       <h3>Suscripción</h3>
     </button>
+
+    <p id="mensaje-cliente" style="display: none; max-width: 520px; margin: 0 auto; text-align: center;">Para agregar comercios, puesto u ofertas, deberás ser un usuario tipo comerciante. Contáctate con uno de nuestros administradores para solicitar el cambio de rol o crea una cuenta nueva de tipo comerciante.</p>
+
+    <p id="mensaje-sesion" style="display: none; max-width: 520px; margin: 0 auto; text-align: center;">No se pudieron cargar las opciones de registro. <a href="/inicioSesion">Inicia sesión</a> e inténtalo de nuevo.</p>
   </div>
 
-  <div class="acceso-mis-mercados">
+  <div class="acceso-mis-mercados" id="acceso-comercios" style="display: none;">
     <a href="/miscomercios.html">
       Administrar mis mercados
       <i class="fa-solid fa-arrow-right"></i>
     </a>
   </div>
 
-  <div class="acceso-mis-mercados">
+  <div class="acceso-mis-mercados" id="acceso-puestos" style="display: none;">
     <a href="/mispuestos.html"> 
       Administrar mis puestos
       <i class="fa-solid fa-arrow-right"></i></a>
@@ -62,6 +66,7 @@
       style="font-size: 40px"></i>Configuración</button>
   <button class="bottom" id="sus" onclick="window.location.href='suscripcion.html'"><i class="fa-solid fa-credit-card"
       style="font-size: 40px"></i>Suscripción</button>
+  <script src="js/registrar.js"></script>
 </body>
 
 </html>

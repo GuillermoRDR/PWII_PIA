@@ -27,7 +27,7 @@
       <div class="columna">
         <div class="campo">
           <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" placeholder="">
+          <input type="text" id="nombre" placeholder="" maxlength="120">
         </div>
 
         <div class="campo">
@@ -54,10 +54,41 @@
           <input type="file" id="imagen" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
         </div>
       </div>
+
+      <div class="columna">
+        <div class="campo">
+          <label for="puesto">Puesto:</label>
+          <select id="puesto">
+            <option value="" selected>Selecciona un puesto</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="descuento">Descuento (%):</label>
+          <input type="number" id="descuento" min="0" max="100" step="any" placeholder="0">
+        </div>
+
+        <div class="campo">
+          <label for="vence">Vence el (opcional):</label>
+          <input type="date" id="vence">
+        </div>
+
+        <div class="campo campo-dias">
+          <label>Solo con suscripción activa:</label>
+          <div class="dias">
+            <div class="dia">
+              <input type="checkbox" id="exclusiva">
+              <label for="exclusiva">Sí</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <button id="ragbot" onclick="window.location.href='principal.html'">Registrar oferta</button>
+  <p id="mensaje-registro" role="status" aria-live="polite"></p>
+
+  <button id="ragbot" type="button" disabled>Registrar oferta</button>
 
   <script>
     function previsualizarImagen(event) {
@@ -74,7 +105,7 @@
       reader.readAsDataURL(file);
     }
   </script>
-
+  <script src="/js/registrarOferta.js"></script>
 </body>
 
 </html>

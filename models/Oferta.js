@@ -9,18 +9,22 @@ const ofertaSchema = new mongoose.Schema(
     },
     descripcion: { 
       type: String, 
-      required: true 
+      required: true ,
+      trim: true
     },
     descuento: { 
       type: Number,
-      default: 0 
-    },
-    fechaInicio: { 
-      type: Date, 
-      default: Date.now 
+      default: 0,
+      min: 0,
+      max: 100
     },
     fechaFin: { 
-      type: Date 
+      type: Date,
+      default: null
+    },
+    imagenOferta: {
+      type: String,
+      default: ''
     },
     activa: { 
       type: Boolean, 
@@ -29,12 +33,14 @@ const ofertaSchema = new mongoose.Schema(
     idPuesto: { 
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'Puesto', 
-      required: true 
+      required: true,
+      index: true 
     },
     codigoOferta: {
       type: String,
       uppercase: true,
-      trim: true
+      trim: true,
+      default: ''
     },
     exclusivoPlus: { 
       type: Boolean, 
@@ -46,6 +52,4 @@ const ofertaSchema = new mongoose.Schema(
   }
 );
 
-const Oferta = mongoose.model('Oferta', ofertaSchema);
-
-export default Oferta;
+export default mongoose.model('Oferta', ofertaSchema);
