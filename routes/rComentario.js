@@ -1,14 +1,19 @@
 import { Router } from 'express';
-import multer from 'multer';
-import { registrarComentario, obtenerComentario } from '../controllers/cComentario.js';
+import {
+  obtenerComentarios,
+  crearComentario,
+  actualizarComentario,
+  eliminarComentario
+} from '../controllers/cComentario.js';
+import { protegerRuta, autorizarRoles } from '../controllers/middleware.js';
 
-const rutas = Router();
+const router = Router();
+const todosLosRoles = autorizarRoles('cliente', 'comerciante', 'administrador');
 
+router.get('/puesto/:idPuesto', obtenerComentarios);
 
+router.post('/', protegerRuta, todosLosRoles, crearComentario);
+router.patch('/:id', protegerRuta, todosLosRoles, actualizarComentario);
+router.delete('/:id', protegerRuta, todosLosRoles, eliminarComentario);
 
-rutas.post('/registro', registrarComentario);
-
-rutas.get('/Comentario/:id', protegerRuta, obtenerComentario);
-
-
-export default rutas;
+export default router;

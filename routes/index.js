@@ -5,6 +5,7 @@ import comerciosRouter from './rComercio.js';
 import puestosRouter from './rPuesto.js';
 import suscripcionesRouter from './rSuscripcion.js';
 import ofertasRouter from './rOferta.js';
+import comentariosRouter from './rComentario.js';
 
 const rutas = Router();
 const viewsPath = path.join(process.cwd(), 'views');
@@ -26,5 +27,6 @@ rutas.use('/api/comercios', comerciosRouter);
 rutas.use('/api/puestos', puestosRouter);
 rutas.use('/api/suscripciones', suscripcionesRouter);
 rutas.use('/api/ofertas', ofertasRouter);
+rutas.use('/api/comentarios', comentariosRouter);
 
 export default rutas;
