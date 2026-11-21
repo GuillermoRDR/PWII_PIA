@@ -1127,3 +1127,13 @@ button#eliminar-puesto:hover {
   display: none !important;
 }
 
+#contador-crit {
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+#estado-comentario {
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+

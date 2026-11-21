@@ -69,101 +69,14 @@
     </div>
   </section>
 
-  <div class="opciones">
-    <h2>Críticas:</h2>
-    <input type="text" id="crit" placeholder="Comenta tu opinión:">
-    <button id="send">Enviar</button>
+ <div class="opciones">
+    <h2>Comentarios:</h2>
+    <input type="text" id="crit" placeholder="Comenta tu opinión:" maxlength="200">
+    <button id="send" type="button">Enviar</button>
+    <span id="contador-crit">0/200</span>
+    <p id="estado-comentario" role="status" aria-live="polite"></p>
 
     <div class="criticas" id="lista-criticas">
-      <article class="critica">
-        <a class="critica-avatar" href="perfil.html" aria-label="Perfil de Don Javier">
-          <img src="media/images/jav.jpg" alt="Don Javier">
-        </a>
-        <div class="critica-cuerpo">
-          <div class="critica-cabecera">
-            <a class="critica-nombre" href="perfil.html">Don Javier</a>
-            <span class="critica-tiempo">hace 2 días</span>
-          </div>
-          <p class="critica-texto">Los tacos de pastor están buenísimos y se nota que las tortillas son hechas a mano.
-            El sábado regreso por más.</p>
-          <div class="critica-acciones">
-            <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
-                class="fa-solid fa-trash"></i> Eliminar</button>
-          </div>
-          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i
-              class="fa-solid fa-chevron-down"></i></button>
-          <div class="respuestas">
-            <div class="respuesta">
-              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html"
-                aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
-              <div class="critica-cuerpo">
-                <div class="critica-cabecera">
-                  <a class="critica-nombre" href="perfil.html">Don Pepe Torrez</a>
-                  <span class="etiqueta-dueno">Dueño</span>
-                  <span class="critica-tiempo">hace 2 días</span>
-                </div>
-                <p class="respuesta-texto">¡Gracias, Don Javier! Aquí lo esperamos el sábado con su orden de siempre.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="critica">
-        <a class="critica-avatar sin-foto" href="perfil.html" aria-label="Perfil de María Fernanda R.">
-          <i class="fa-solid fa-user"></i>
-        </a>
-        <div class="critica-cuerpo">
-          <div class="critica-cabecera">
-            <a class="critica-nombre" href="perfil.html">María Fernanda R.</a>
-            <span class="critica-tiempo">hace 5 días</span>
-          </div>
-          <p class="critica-texto">Buen sabor y buen precio. Eso sí, a la hora de la comida hay bastante fila, vayan
-            temprano.</p>
-          <div class="critica-acciones">
-            <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
-                class="fa-solid fa-trash"></i> Eliminar</button>
-          </div>
-          <button class="ver-respuestas" aria-expanded="false" onclick="alternarRespuestas(this)">1 respuesta <i
-              class="fa-solid fa-chevron-down"></i></button>
-          <div class="respuestas">
-            <div class="respuesta">
-              <a class="critica-avatar critica-avatar-chico sin-foto" href="perfil.html"
-                aria-label="Perfil de Don Pepe Torrez"><i class="fa-solid fa-user"></i></a>
-              <div class="critica-cuerpo">
-                <div class="critica-cabecera">
-                  <a class="critica-nombre" href="perfil.html">Don Pepe Torrez</a>
-                  <span class="etiqueta-dueno">Dueño</span>
-                  <span class="critica-tiempo">hace 4 días</span>
-                </div>
-                <p class="respuesta-texto">Gracias por avisar, ya sumamos una persona más para atender más rápido.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="critica">
-        <a class="critica-avatar sin-foto" href="perfil.html" aria-label="Perfil de Luis Ángel G.">
-          <i class="fa-solid fa-user"></i>
-        </a>
-        <div class="critica-cuerpo">
-          <div class="critica-cabecera">
-            <a class="critica-nombre" href="perfil.html">Luis Ángel G.</a>
-            <span class="critica-tiempo">hace 1 semana</span>
-          </div>
-          <p class="critica-texto">Los desayunos son lo mejor del puesto, el de chorizo con huevo nunca falla.</p>
-          <div class="critica-acciones">
-            <button class="critica-btn" onclick="editarCritica(this)"><i class="fa-solid fa-pen"></i> Editar</button>
-            <button class="critica-btn critica-btn-eliminar" onclick="eliminarCritica(this)"><i
-                class="fa-solid fa-trash"></i> Eliminar</button>
-          </div>
-        </div>
-      </article>
-
       <p class="sin-criticas" id="sin-criticas" hidden>Aún no hay críticas.</p>
     </div>
   </div>
@@ -382,71 +295,6 @@
         document.getElementById('foto-puesto').src = imagenNueva;
       }
       document.getElementById('blur-editar').classList.remove('mostrar');
-    }
-
-    function alternarRespuestas(boton) {
-      var respuestas = boton.parentElement.querySelector('.respuestas');
-      var abierta = respuestas.classList.toggle('abierta');
-      boton.setAttribute('aria-expanded', abierta ? 'true' : 'false');
-    }
-
-    function editarCritica(boton) {
-      var critica = boton.closest('.critica');
-      var texto = critica.querySelector('.critica-texto');
-      var edicion = document.createElement('div');
-      var campo = document.createElement('textarea');
-      var barra = document.createElement('div');
-      var guardar = document.createElement('button');
-      var cancelar = document.createElement('button');
-
-      edicion.className = 'critica-edicion';
-      barra.className = 'critica-acciones';
-      guardar.className = 'critica-btn critica-btn-guardar';
-      guardar.textContent = 'Guardar';
-      cancelar.className = 'critica-btn';
-      cancelar.textContent = 'Cancelar';
-      campo.rows = 3;
-      campo.value = texto.textContent;
-
-      guardar.onclick = function () {
-        var nuevo = campo.value.trim();
-        var tiempo = critica.querySelector('.critica-tiempo');
-        if (nuevo) {
-          texto.textContent = nuevo;
-          if (tiempo.textContent.indexOf('editado') === -1) {
-            tiempo.textContent += ' (editado)';
-          }
-        }
-        edicion.remove();
-        critica.classList.remove('editando');
-      };
-
-      cancelar.onclick = function () {
-        edicion.remove();
-        critica.classList.remove('editando');
-      };
-
-      barra.appendChild(guardar);
-      barra.appendChild(cancelar);
-      edicion.appendChild(campo);
-      edicion.appendChild(barra);
-      texto.after(edicion);
-      critica.classList.add('editando');
-      campo.focus();
-    }
-
-    function eliminarCritica(boton) {
-      criticaPorEliminar = boton.closest('.critica');
-      document.getElementById('blur-critica').classList.add('mostrar');
-    }
-
-    function confirmarEliminarCritica() {
-      if (criticaPorEliminar) {
-        criticaPorEliminar.remove();
-      }
-      criticaPorEliminar = null;
-      document.getElementById('blur-critica').classList.remove('mostrar');
-      document.getElementById('sin-criticas').hidden = document.querySelectorAll('.critica').length > 0;
     }
 
     function alternarCodigo(boton) {

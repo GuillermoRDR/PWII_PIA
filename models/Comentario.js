@@ -1,33 +1,44 @@
+
 import mongoose from 'mongoose';
 
 const comentarioSchema = new mongoose.Schema(
   {
     contenido: {
       type: String,
-      required: true
-    },
-    cantidadEstrellas: {
-      type: Number,
       required: true,
-      min: 1,
-      max: 5,
-      default: 5
+      trim: true,
+      maxlength: 200
     },
+
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Usuario',
       required: true
     },
-    comercio: {
+
+    puesto: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comercio',
-      required: true
+      ref: 'Puesto',
+      required: true,
+      index: true
+    },
+
+    activo: {
+      type: Boolean,
+      default: true
+    },
+
+    editado: {
+      type: Boolean,
+      default: false
     }
   },
   {
-    timestamps: true 
+    timestamps: true
   }
 );
+
+comentarioSchema.index({ puesto: 1, activo: 1, createdAt: -1 });
 
 const Comentario = mongoose.model('Comentario', comentarioSchema);
 
